@@ -8,8 +8,10 @@
  */
 
 import sbt._
-class ScalaIntroKurs(info: ProjectInfo) extends DefaultProject(info)
+class ScalaIntroKurs(info: ProjectInfo) extends DefaultProject(info) with IdeaProject
 {
   val sbtIdeaRepo = "sbtIdeaRepo" at "http://mpeltonen.github.com/maven/"
-  def idea = "com.github.mpeltonen" % "sbt-idea-processor" %  "0.1.0"
+  val sbtCommand =  "com.github.mpeltonen" % "sbt-idea-processor" %  "0.1.0"
+
+  val scalatest = "org.scalatest" % "scalatest" % "1.2"
 }
