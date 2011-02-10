@@ -9,3 +9,4 @@ project/plugins/target/
 project/project.iml
 scala_intro_kurs.iml
 target/
+out/
