@@ -29,3 +29,7 @@ case class Blomst(val navn:String, val hoyde:Int, val utseende:Utseende)
 
 // Traits-oppgavene
 case class Bukk(navn: String, størrelse: String)
+
+trait Tramping {
+  def trampe: String
+}
