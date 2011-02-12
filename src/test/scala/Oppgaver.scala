@@ -196,21 +196,31 @@ class Oppgaver extends Spec with ShouldMatchers {
 
         val enBukk = null
 
-        // Bruk "interface"-traitet Tramping
+        // Mix inn "interface"-traitet Tramping
 
         // kommenteres inn
         // enBukk.trampe should be ("Tramp tramp!")
       }
 
-      it("Få bukken til å stange trollet") {
+      ignore("Få bukken til å stange trollet") {
 
         val enBukk = null
 
-        // Bruk "method"-interfacet Stanging
+        // Mix inn "method"-interfacet Stanging
 
         // kommenteres inn
-        //enBukk.stange should be ("Trollet")
+        // enBukk.stange should be ("Trollet")
       }
+
+      ignore("Lag en geitekilling som sier 'meee'") {
+
+        // Hint: her må man lage en egen BukkSomKilling-klasse og bruke "stackable"-traitet Killing
+        val killing = new Bukk("bitteLille", "XS")
+
+        killing.siMæ should be ("meeee")
+
+      }
+
     }
 
   }

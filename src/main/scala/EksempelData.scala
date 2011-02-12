@@ -28,7 +28,9 @@ case class Farge(val navn:String)
 case class Blomst(val navn:String, val hoyde:Int, val utseende:Utseende)
 
 // Traits-oppgavene
-case class Bukk(navn: String, størrelse: String)
+case class Bukk(navn: String, størrelse: String) {
+  def siMæ = "MÆÆÆÆ"
+}
 
 trait Tramping {
   def trampe: String
@@ -36,4 +38,8 @@ trait Tramping {
 
 trait Stanging {
   def stange = "Heksa"
+}
+
+trait Killing extends Bukk {
+  override def siMæ = "meeee"
 }
