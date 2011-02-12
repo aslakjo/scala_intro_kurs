@@ -187,19 +187,29 @@ class Oppgaver extends Spec with ShouldMatchers {
         val bukkene = EksempelData.bukkeneBruse
 
         val størsteBukken: Bukk = bukkene(0)
-        //Hint bruk max() på lista og legg til Ordered-traitet på Bukk-klassen
+        //Hint: bruk max() på lista og legg til Ordered-traitet på Bukk-klassen
 
         størsteBukken.navn should be ("Største")
       }
 
-      ignore("Få bukkene til å trampe på brua") {
+      ignore("Få bukken til å trampe på brua") {
 
         val enBukk = null
 
-        // Hint bruke "interface"-traitet Tramping
+        // Bruk "interface"-traitet Tramping
 
         // kommenteres inn
         // enBukk.trampe should be ("Tramp tramp!")
+      }
+
+      it("Få bukken til å stange trollet") {
+
+        val enBukk = null
+
+        // Bruk "method"-interfacet Stanging
+
+        // kommenteres inn
+        //enBukk.stange should be ("Trollet")
       }
     }
 

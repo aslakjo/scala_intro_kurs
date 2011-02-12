@@ -33,3 +33,7 @@ case class Bukk(navn: String, størrelse: String)
 trait Tramping {
   def trampe: String
 }
+
+trait Stanging {
+  def stange = "Heksa"
+}
