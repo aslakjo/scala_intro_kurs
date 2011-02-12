@@ -181,5 +181,17 @@ class Oppgaver extends Spec with ShouldMatchers {
 
     }
 
+    describe("oppgave 6 - traits") {
+
+      ignore("Finn den største bukkene bruse") {
+        val bukkene = EksempelData.bukkeneBruse
+
+        val størsteBukken: Bukk = bukkene(0)
+        //Hint bruk max() på lista og legg til Ordered-traitet på Bukk-klassen
+
+        størsteBukken.navn should be("Største")
+      }
+    }
+
   }
 }
