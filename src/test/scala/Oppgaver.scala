@@ -115,5 +115,72 @@ class Oppgaver extends Spec with ShouldMatchers {
 
     }
 
+    describe ("oppgave 4 - case classes") {
+      it ("lag en person") {
+        val person = null
+
+        person_har_navn_og_alder(person)
+
+        def person_har_navn_og_alder(person: {val navn:String; val alder:Int})={
+          person should not be (null)
+          person.navn should not be ('empty)
+          person.alder should be > 0
+        }
+      }
+
+      it ("implementer person slik at to med likt navn og alder er identiske(equals)") {
+        val person1:AnyRef = null
+        val person2:AnyRef = ""
+
+        person1 should equal(person2)
+      }
+
+      it ("implement person slik at hash code er ihenhold til java standard")  {
+        val person1:AnyRef = null
+        val person2:AnyRef = ""
+
+        person1.hashCode should equal(person2.hashCode)
+      }
+
+      it ("kopier en person inn i en annen variabel") {
+        val person1:navnOgAlder = null
+        val person2:navnOgAlder = null
+
+        person1 should not be theSameInstanceAs(person2)
+
+        skal_ha_samme_navn_og_alder(person1, person2)
+
+
+        type navnOgAlder = {val navn:String; val alder:Int}
+
+        def skal_ha_samme_navn_og_alder(a:navnOgAlder, b:navnOgAlder)={
+          a.navn should equal(b.navn)
+          a.alder should equal(b.alder)
+        }
+      }
+
+      describe ("oppgave 5 - pattern matching") {
+        it ("Finn blomster over 20 cm") {
+          val hoyeBlomster = EksempelData.blomster
+          hoyeBlomster.foreach(_.hoyde should be > (20))
+        }
+
+        it ("Finn alle pene blomster(som har som superclasse)") {
+          val peneBlomster:List[Blomst] = EksempelData.blomster
+
+          peneBlomster.size should be (2)
+          peneBlomster should not contain(Blomst("Løvetan", 8, Utseende(Farge("Gul"))))
+        }
+
+        it ("Hent fargen på blomsten") {
+          val farger:List[String] = null//EksempelData.blomster.map
+
+          farger should be (List("Rød", "Blå", "Gul"))
+        }
+
+      }
+
+    }
+
   }
 }
