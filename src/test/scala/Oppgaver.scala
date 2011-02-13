@@ -10,7 +10,7 @@ class Oppgaver extends Spec with ShouldMatchers {
 
     describe("oppgave 1 - looping ") {
 
-      ignore("deklarativt") {
+      ignore("imperativt") {
         var i = 0
 
         //loop over tallFra1Til10 med en for løkke
@@ -18,7 +18,7 @@ class Oppgaver extends Spec with ShouldMatchers {
         i should be(10)
       }
 
-      ignore("imperativt") {
+      ignore("funksjonelt") {
 
         val i = 0 //loop over tallFra1Til10 imperativt
 
