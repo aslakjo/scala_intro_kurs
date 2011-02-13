@@ -1,0 +1,86 @@
+\documentclass[norsk]{beamer}
+ 
+\usepackage[T1]{fontenc}
+\usepackage{textcomp,pdfpages}
+\usepackage{babel}
+
+\usepackage{amsmath, amsfonts, epsfig, xspace}
+\usepackage{pstricks,pst-node}
+\usepackage{multimedia}
+\usepackage{beamerthemesplit}
+\usepackage[absolute, overlay]{textpos}
+
+\usetheme{bekk}
+
+
+\author{Aslak Johannessen \\ aslakjo@bekk.no  @aslakjo}
+
+\title[Scala kurs]{BEKK Consulting}
+\institute{BEKK Consulting AS}
+
+
+\begin{document}
+
+\begin{frame}{Traits}
+  \begin{content}
+	Et trait spesifiser egenskap.\\ 
+	- En klasse kan få flere traits "mixet inn"  \\
+	- Traits kan ikke opprettes på egenhånd
+	
+  \end{content}
+\end{frame}
+
+\begin{frame}[containsverbatim]{Bruk av traits}
+  \begin{content}
+    \begin{lstlisting}[basicstyle={\tiny\ttfamily}]
+	trait HealthCheckable{ //interface
+	  def isOk: Boolean
+	}
+	trait Logger { //egenskap
+	  def log(message: String):Unit = println(message)
+	}
+	trait LoggProcessing extends FooService{ //stackable trait
+	  def log(message:String):Unit
+	
+	  override def process:Unit={ //ny oppførsel
+	    log("Starting processing")
+	    super.process
+	    log("Stopped processing")
+	  }
+	}
+	
+	class FooService extends HealthCheckable with Logger{ 
+	  def isOk:Boolean = true
+	
+	  def process = {
+	    //go allot!
+	  }
+	}
+	
+	object Application{  new FooService with LoggProcessing } //mix inn ved opprettelse
+    \end{lstlisting}
+  \end {content}
+\end{frame}
+
+\begin{frame}[plain]
+  \begin{centering}
+    \includegraphics[height=11em]{bekk}
+    \\\vspace{2em}\hfill\\
+    \small
+    \includegraphics[height=1em]{bekk-logo}
+    \\\vspace{.4em}\hfill\\
+    \fontsize{8}{8}
+    \selectfont
+    \textbf{Aslak Johannessen}\\
+    Senior Consultant\\
+    982 19 249 \\
+    aslakjo@bekk.no\\
+    \vspace{.3em}\hfill\\
+    \fontsize{1}{1}
+    \selectfont
+    BEKK CONSULTING AS\\
+S   KUR 39, VIPPETANGEN. P.O. BOX 134 SENTRUM, 0102 OSLO, NORWAY. WWW.BEKK.NO\\
+  \end{centering}
+\end{frame}
+
+\end{document}

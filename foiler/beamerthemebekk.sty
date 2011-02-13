@@ -1,0 +1,129 @@
+\mode<presentation>
+
+\usepackage[T1]{fontenc}
+\usepackage{gfsdidot}
+\usepackage{listings}
+
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+
+\lstset{
+  language=java,
+  aboveskip=3mm,
+  belowskip=3mm,
+  showstringspaces=false,
+  columns=flexible,
+  basicstyle={\ttfamily},
+  numberstyle=\tiny\color{gray},
+  keywordstyle=\color{blue},
+  commentstyle=\color{dkgreen},
+  stringstyle=\color{mauve},
+  breaklines=true,
+  breakatwhitespace=true,
+  tabsize=2
+}
+
+
+\renewcommand{\sfdefault}{rmfamily}
+
+\fontsize{20}{25}
+\selectfont
+
+\usecolortheme{bekk}
+\graphicspath{{./img/}}
+
+\setlength{\TPHorizModule}{1em} 
+\setlength{\TPVertModule}{\TPHorizModule} 
+\textblockorigin{1.5em}{2.5em}
+\setlength{\parindent}{1pt}
+
+\setbeamerfont{author}{family=\rmfamily,size=\large}
+\setbeamerfont{date}{family=\rmfamily,size=\large}
+\setbeamerfont{example text}{family=\rmfamily,series=\bfseries}
+\setbeamerfont{frametitle}{family=\rmfamily,series=\mdseries,size=\large}
+\setbeamerfont{framesubtitle}{series=\mdseries,size=\large}
+\setbeamerfont{section}{family=\rmfamily,series=\mdseries}
+\setbeamerfont{title}{family=\rmfamily,size=\LARGE,series=\bfseries }
+
+\setbeamertemplate{navigation symbols}{}
+
+\beamertemplatesolidbackgroundcolor{BEKKhvit}
+
+
+\newenvironment{contrast}[1]{
+	\begin{frame}[plain]
+	\begin{centering}
+	\fontsize{25}{25}
+	{#1}\par
+	\end{centering}
+}{\end{frame}}
+
+\newcommand{\kontrast}[1]{
+  \beamertemplatesolidbackgroundcolor{BEKKsort}
+  \usebeamercolor[bg]{BEKKlysbrun}
+  \begin{contrast}{\usebeamerfont{title}#1}
+  \end{contrast}
+  \beamertemplatesolidbackgroundcolor{BEKKhvit}
+  \usebeamercolor[fg]{BEKKmorkbrun}
+}
+
+\newenvironment{content}[0]{
+	\begin{textblock}{16}(0,0)
+}{%
+	\end{textblock}
+}
+
+\newcommand{\subitem}[1]{
+  \begin{itemize}
+    \item #1
+  \end{itemize}
+}
+
+
+\setlength{\footheight}{10em}
+\setlength{\footskip}{0.1in}
+\usefoottemplate{\vbox{
+	\insertshorttitle
+	\hfill
+	\insertframenumber
+}}
+
+\defbeamertemplate*{title page}{}[1][]
+{
+  \vbox{}
+  \vfill
+  \begin{centering}
+    \includegraphics[height=7.6em]{forside}
+    \vskip1em\par
+  \end{centering}
+
+  \begin{flushleft}
+    \begin{beamercolorbox}[sep=5pt,left,#1]{BEKKhvit}
+      \usebeamercolor[fg]{BEKKmorkbrun}\usebeamerfont{title}\inserttitle
+    \end{beamercolorbox}
+ 
+    \noindent{.\dotfill.\par}
+
+    \ifx\insertsubtitle\@empty%
+    \else%
+      {\insertsubtitle\par}%
+    \fi%
+    \insertdate 
+  \end{flushleft}
+  \vfill
+  \includegraphics[height=1.81em]{forside-bunn}
+}
+
+\setbeamertemplate{frametitle}
+{
+	\vspace{10pt}
+	\usebeamercolor[bg]{BEKKmorkbrun}
+	\usebeamerfont{framesubtitle}\textbf{\insertframetitle}
+	\vspace{1in}
+	\rule{\textwidth}{1pt}
+}
+
+
+
+\mode<all>
