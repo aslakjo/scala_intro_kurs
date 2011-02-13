@@ -21,12 +21,82 @@
 
 \begin{document}
 
+
+\begin{frame}{Case classes}
+  \begin{content}
+  	En case classe er en normal klasse med masse ekstrautstyr 
+  	\begin{itemize}
+	  	\item Hash code og equals er implmentert korrekt, og på bakgrunn av verdiene
+	  	\item Det companion object er laget
+	  	\item Unapply / extractors er lage
+	\end{itemize}
+  	
+  \end{content}
+\end{frame}
+
+
+\begin{frame}[containsverbatim]{Bruk av case classes}
+  \begin{content}
+    \begin{lstlisting}[basicstyle={\small\ttfamily}]	    	
+	case class Sykkel(val farge:String, val hjul:Int) //def
+	
+	object CaseClassApp extends Application{
+	  //compainon og new
+	  assert(Sykkel("rød", 2).equals(new Sykkel("rød", 2))) 
+	}
+	
+	//unapply kommer ..
+    \end{lstlisting}
+  \end {content}
+\end{frame}
+
+\begin{frame}{Patternmatching}
+  \begin{content}
+  	En veldig veldig kraftig variant av \it{switch} statementet 
+  	\begin{itemize}
+	  	\item Gir muligheten til å velge hele eller deler av et object
+	  	\item Mulig å matche på typer, verdier, arv, innhold i referanser
+	\end{itemize}
+  \end{content}
+\end{frame}
+
+
+\begin{frame}[containsverbatim]{Bruk av pattern matching}
+  \begin{content}
+    \begin{lstlisting}[basicstyle={\tiny\ttfamily}]	    			
+	case class Farge(val navn:String)
+	
+	case class Bil(val farge:Farge, val hjul:Int)
+	
+	object PatternMatcingApp extends Application{
+	  def godkjenntBil(dings: AnyRef)={
+	    dings match {
+	      //variabel pattern, med guard
+	      case Bil(_, hjul) if hjul <= 2 => println("En slik bil heter gjerne motorsykkel")
+	      //verdi pattern
+	      case Bil(_, 4) => println("helt vanelig bil")
+	      //sjekking i refererte objecter, variable pattern og guard
+	      case Bil(Farge(fargePaBil), _) if fargePaBil.equals("rød") => println("Jippi en rød bil!")
+	      //@ binder variabelen s til det som er på høyre side
+	      case s@Bil(farve, _) if farve != null => println("dette er en " + farve.navn + " bil")
+	      // type pattern
+	      case s:Bil => println("dette er en bil")
+	      //wildcard pattern, matcher alt
+	      case _ => println("dette kan være hva som helst uten om en bil")
+	    }
+	  }
+	}
+    \end{lstlisting}
+  \end {content}
+\end{frame}
+
 \begin{frame}{Traits}
   \begin{content}
-	Et trait spesifiser egenskap.\\ 
-	- En klasse kan få flere traits "mixet inn"  \\
-	- Traits kan ikke opprettes på egenhånd
-	
+	Et trait spesifiser egenskap.
+  	\begin{itemize}
+		\item En klasse kan få flere traits "mixet inn"  
+		\item Traits kan ikke opprettes på egenhånd
+	\end{itemize}
   \end{content}
 \end{frame}
 
@@ -58,69 +128,6 @@
 	}
 	
 	object Application{  new FooService with LoggProcessing } //mix inn ved opprettelse
-    \end{lstlisting}
-  \end {content}
-\end{frame}
-
-\begin{frame}{Case classes}
-  \begin{content}
-  	En case classe er en normal klasse med masse ekstrautstyr \\
-  	- Hash code og equals er implmentert korrekt, og på bakgrunn av verdiene\\
-  	- Det companion object er laget\\
-  	- Unapply / extractors er laget\\
-  	
-  \end{content}
-\end{frame}
-
-
-\begin{frame}[containsverbatim]{Bruk av case classes}
-  \begin{content}
-    \begin{lstlisting}[basicstyle={\tiny\ttfamily}]	    	
-	case class Sykkel(val farge:String, val hjul:Int) //def
-	
-	object CaseClassApp extends Application{
-	  assert(Sykkel("rød", 2).equals(new Sykkel("rød", 2))) //compainon og new
-	}
-	
-	//unapply kommer ..
-    \end{lstlisting}
-  \end {content}
-\end{frame}
-
-\begin{frame}{Patternmatching}
-  \begin{content}
-  	En veldig veldig kraftig variant av \it{switch} statementet \\
-  	- Gir muligheten til å velge hele eller deler av et object\\
-  	- Mulig å matche på typer, verdier, arv, innhold i referanser\\
-  \end{content}
-\end{frame}
-
-
-\begin{frame}[containsverbatim]{Bruk av pattern matching}
-  \begin{content}
-    \begin{lstlisting}[basicstyle={\tiny\ttfamily}]	    			
-	case class Farge(val navn:String)
-	
-	case class Bil(val farge:Farge, val hjul:Int)
-	
-	object PatternMatcingApp extends Application{
-	  def godkjenntBil(dings: AnyRef)={
-	    dings match {
-	      //variabel pattern, med guard
-	      case Bil(_, hjul) if hjul <= 2 => println("En slik bil heter gjerne motorsykkel")
-	      //verdi pattern
-	      case Bil(_, 4) => println("helt vanelig bil")
-	      //sjekking i refererte objecter, variable pattern og guard
-	      case Bil(Farge(fargePaBil), _) if fargePaBil.equals("rød") => println("Jippi en rød bil!")
-	      //@ binder variabelen s til det som er på høyre side
-	      case s@Bil(farve, _) if farve != null => println("dette er en " + farve.navn + " bil")
-	      // type pattern
-	      case s:Bil => println("dette er en bil")
-	      //wildcard pattern, matcher alt
-	      case _ => println("dette kan være hva som helst uten om en bil")
-	    }
-	  }
-	}
     \end{lstlisting}
   \end {content}
 \end{frame}
