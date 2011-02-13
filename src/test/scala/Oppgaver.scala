@@ -142,7 +142,7 @@ class Oppgaver extends Spec with ShouldMatchers {
         person1.hashCode should equal(person2.hashCode)
       }
 
-      ignore("kopier en person inn i en annen variabel") {
+      ignore("kopier en person inn i en annen variabel (egentlig ikke en case class greie)") {
         val person1: navnOgAlder = null
         val person2: navnOgAlder = null
 
@@ -161,12 +161,12 @@ class Oppgaver extends Spec with ShouldMatchers {
     }
 
     describe("oppgave 5 - pattern matching") {
-      ignore("Finn blomster over 20 cm") {
+      ignore("Finn alle blomster over 20 cm") {
         val hoyeBlomster = EksempelData.blomster
         hoyeBlomster.foreach(_.hoyde should be > (20))
       }
 
-      ignore("Finn alle pene blomster(som har som superclasse)") {
+      ignore("Finn alle pene blomster(som har Pen som superklasse)") {
         val peneBlomster: List[Blomst] = EksempelData.blomster
 
         peneBlomster.size should be(2)

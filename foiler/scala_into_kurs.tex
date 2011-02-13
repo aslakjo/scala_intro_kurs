@@ -26,9 +26,9 @@
   \begin{content}
   	En case classe er en normal klasse med masse ekstrautstyr 
   	\begin{itemize}
-	  	\item Hash code og equals er implmentert korrekt, og på bakgrunn av verdiene
+	  	\item Hash code og equals er implementert korrekt, og på bakgrunn av verdiene
 	  	\item Det companion object er laget
-	  	\item Unapply / extractors er lage
+	  	\item Unapply / extractors er laget
 	\end{itemize}
   	
   \end{content}
@@ -71,7 +71,7 @@
 	object PatternMatcingApp extends Application{
 	  def godkjenntBil(dings: AnyRef)={
 	    dings match {
-	      //variabel pattern, med guard
+	      //Constuctor pattarn, variabel pattern, med guard og extractor
 	      case Bil(_, hjul) if hjul <= 2 => println("En slik bil heter gjerne motorsykkel")
 	      //verdi pattern
 	      case Bil(_, 4) => println("helt vanelig bil")
@@ -94,6 +94,7 @@
   \begin{content}
 	Et trait spesifiser egenskap.
   	\begin{itemize}
+  		\item Kan brukes om interface(abstract traits)
 		\item En klasse kan få flere traits "mixet inn"  
 		\item Traits kan ikke opprettes på egenhånd
 	\end{itemize}
