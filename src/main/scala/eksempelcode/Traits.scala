@@ -27,6 +27,6 @@ class FooService extends HealthCheckable with Logger{
   }
 }
 
-object Application{
+object TraitsApp extends Application{
   new FooService with LoggProcessing
 }
