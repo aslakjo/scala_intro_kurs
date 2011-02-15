@@ -201,39 +201,39 @@ class Oppgaver extends Spec with ShouldMatchers {
 
     describe("oppgave 6 - traits") {
 
-      ignore("Finn den største bukkene bruse") {
+      it("Finn den største bukkene bruse") {
         val bukkene = EksempelData.bukkeneBruse
 
-        val størsteBukken: Bukk = bukkene(0)
+        val størsteBukken: Bukk = bukkene.max
         //Hint: bruk max() på lista og legg til Ordered-traitet på Bukk-klassen
 
         størsteBukken.navn should be ("Største")
       }
 
-      ignore("Få bukken til å trampe på brua") {
+      it("Få bukken til å trampe på brua") {
 
-        val enBukk = null
+        val enBukk = new Bukk("Aslak", "L") with Tramping {
+          def trampe = "Tramp tramp!"
+        }
 
-        // Mix inn "interface"-traitet Tramping
-
-        // kommenteres inn
-        // enBukk.trampe should be ("Tramp tramp!")
+        enBukk.trampe should be ("Tramp tramp!")
       }
 
-      ignore("Få bukken til å stange trollet") {
+      it("Få bukken til å stange trollet") {
 
-        val enBukk = null
+        val enBukk = new Bukk("Store", "L") with Stanging {
+          override def stange = "Trollet"
+        }
 
-        // Mix inn "method"-interfacet Stanging
-
-        // kommenteres inn
-        // enBukk.stange should be ("Trollet")
+        enBukk.stange should be ("Trollet")
       }
 
-      ignore("Lag en geitekilling som sier 'meee'") {
+      it("Lag en geitekilling som sier 'meee'") {
 
         // Hint: her må man lage en egen BukkSomKilling-klasse og bruke "stackable"-traitet Killing
-        val killing = new Bukk("bitteLille", "XS")
+        val killing = new Bukk("bitteLille", "XS"){
+          override def siMæ = "meeee"
+        }
 
         killing.siMæ should be ("meeee")
 
