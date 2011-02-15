@@ -7,9 +7,9 @@ object EksempelData{
 
   // "Case class"-oppgavene
   val blomster = List(
-    new Blomst("Rose", 10, Utseende(Farge("Rød"))) with Pen,
+    new Blomst("Rose", 21, Utseende(Farge("Rød"))) with Pen,
     new Blomst ("Blåveis", 5, Utseende(Farge("Blå"))) with Pen,
-    Blomst("Løvetan", 8, Utseende(Farge("Gul")))
+    Blomst("Løvetann", 8, Utseende(Farge("Gul")))
   )
 
   // Traits-oppgavene

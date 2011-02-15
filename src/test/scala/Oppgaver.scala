@@ -186,7 +186,7 @@ class Oppgaver extends Spec with ShouldMatchers {
         })
 
         peneBlomster.size should be(2)
-        peneBlomster should not contain (Blomst("Løvetan", 8, Utseende(Farge("Gul"))))
+        peneBlomster should not contain (Blomst("Løvetann", 8, Utseende(Farge("Gul"))))
       }
 
       it("Hent fargen på blomsten") {
