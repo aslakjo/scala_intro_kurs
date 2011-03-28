@@ -31,16 +31,28 @@ class Oppgaver extends Spec with ShouldMatchers {
     }
 
     describe("Klasser"){
+      case class Person(fornavn:String,
+                        etternavn:String,
+                        alder:Int
+                       ){
+        def fulltNavn = "%s %s".format(fornavn, etternavn)
+      }
+
       it("definer en person klasse med navn og alder"){
-        type NavnOgAlder = {val navn:String; val alder:Int}
+        type NavnOgAlder = {val fornavn:String; val alder:Int}
 
-        
-        case class Person(val navn:String, val alder:Int)
+        val person:NavnOgAlder = new Person("aslak", "jo", 27)
 
-        val person:NavnOgAlder = new Person("aslak", 27)
-
-        person.navn should be ("aslak")
+        person.fornavn should be ("aslak")
         person.alder should be (27)
+      }
+
+      describe ("Metoder") {
+        it("Sett sammen for og etternavn"){
+          val person = new Person("ole aleksander", "filibombombom", 4)
+
+          person.fulltNavn should be ("ole aleksander filibombombom")
+        }
       }
     }
 
