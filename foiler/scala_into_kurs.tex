@@ -15,17 +15,202 @@
 
 \author{Aslak Johannessen \\ aslakjo@bekk.no  @aslakjo}
 
-\title[Scala kurs]{BEKK Consulting}
+\title[Scala kurs]{Fagkveld hos BEKK -- Scala}
+\subtitle[]{Introduksjon til scala}
 \institute{BEKK Consulting AS}
 
 
 \begin{document}
 
+\maketitle
+
+\begin{frame}{Velkommen}
+  \begin{content}
+    \begin{itemize}
+  		\item Hvorfor scala?
+	  	\item Kurs
+		  	\subitem{Litt foiler}
+         	  	\subitem{Litt oppgaver}
+	  	\item Middag
+	\end{itemize}
+  \end{content}
+\end{frame}
+
+\begin{frame}{Oss}
+Rune
+Eivind
+Ole Christian
+Torbjørn
+Kai
+Stein Kåre
+Aslak
+\end{frame}
+
+\kontrast{Hvorfor scala?}
+
+\kontrast{Hvorfor scala?\small\\\hfill\\Java er gammelt\\Scala er et riktig steg videre\\Bedre konsepter $\equiv$ bedre kode}
+
+\begin{frame}[containsverbatim]{Gammelt}
+ \begin{content}
+    \begin{lstlisting}[basicstyle={\tiny\ttfamily}]	   
+public class Person{
+    private String navn;
+    private String etternavn;
+    private Integer alder;
+
+    public Person(String fornavn, String etternavn, Integer alder){
+        this.navn = fornavn;
+        this.etternavn = etternavn;
+        this.alder = alder;
+    }
+
+    public String fulltNavn(){
+        return navn + " " + etternavn;
+    }
+
+    public String getNavn(){ return navn; }
+    public void setNavn(String navn){ this.navn = navn; }
+
+    public String getEtternavn(){ return etternavn; }
+    public void setEtternavn(String etternavn){ this.etternavn = etternavn; }
+
+    public Integer getAlder(){ return alder; }
+    public void setAlder(Integer alder){ this.alder = alder; }
+}
+     \end{lstlisting}
+  \end {content}
+\end{frame}
+
+\begin{frame}[containsverbatim]{Nytt}
+ \begin{content}
+    \begin{lstlisting}[basicstyle={\small\ttfamily}]	   
+class Person(
+  val navn:String, 
+  val etternavn:String, 
+  val alder:Int)
+{
+  def fulltNavn ={
+    "%s %s".format(navn, etternavn) 
+  }
+}
+     \end{lstlisting}
+  \end {content}
+\end{frame}
+
+\kontrast{Closure}
+
+
+\begin{frame}[containsverbatim]{Gammelt}
+ \begin{content}
+    \begin{lstlisting}[basicstyle={\small\ttfamily}]	   
+public List<String> interesse(String starterMed){
+  List<String> interesser = new ArrayList<String>();
+  interesser.add("Gym");
+  interesser.add("Sykkel");
+  interesser.add("Scala");
+  interesser.add("Vask");
+  interesser.add("Mat");
+
+  List<String> valgte = new ArrayList<String>();
+  for(String interesse : interesser){
+    if(interesse.startsWith(starterMed)){
+      valgte.add(interesse);
+    }
+  }
+
+  return valgte;
+}
+     \end{lstlisting}
+  \end {content}
+\end{frame}
+
+\begin{frame}[containsverbatim]{Nytt}
+ \begin{content}
+    \begin{lstlisting}[basicstyle={\small\ttfamily}]	   
+val interesser = List(
+   "Gym", "Sykkel", "Scala", 
+   "Vask", "Mat"
+)
+
+def interesse(starterMed:String) = interesser.filter(
+  (s:String) => s.startsWith(starterMed)
+)
+     \end{lstlisting}
+  \end {content}
+\end{frame}
+
+
+\begin{frame}[containsverbatim]{Scala på JVM}
+ \begin{content}
+   Scala er egentlig bare java, plus en jar.\\
+   \includegraphics[height=17em]{jvm}
+ \end {content}
+\end{frame}
+
+\begin{frame}[containsverbatim]{Helt grunnleggende -- Klasser}
+ \begin{content}
+\begin{lstlisting}[basicstyle={\small\ttfamily}]	   
+class Person( //Konstruktørparametere og instansevariabler
+   navn:String, 
+   etternavn:String, 
+   alder:Int)
+{
+  //Konstruktør
+  val interesser = List("ting", "og", "tang") 
+  val cv = "%s %s -- %s\n Liker: %s".format(
+    navn, etternavn, alder, interesser.mkString(", ")
+  )
+  
+  
+  def fulltNavn ={ //Funksjon
+    "%s %s".format(navn, etternavn) 
+  }
+}
+     \end{lstlisting}
+ \end {content}
+\end{frame}
+
+\begin{frame}[containsverbatim]{Helt grunnleggende -- val og var}
+ \begin{content}
+\begin{lstlisting}[basicstyle={\small\ttfamily}]	   
+
+ //Er slik for altid
+  val interesser = List("ting", "og", "tang") 
+  
+  def mineInteresser ={ 
+    var interesser = "" //Kan tilordnes på nytt
+    for(interesse <- interesser){
+    	interesser += interesse + ", "
+    }
+    
+    interesser
+  }
+}
+     \end{lstlisting}
+ \end {content}
+\end{frame}
+
+\begin{frame}[containsverbatim]{Helt grunnleggende -- Oppgaver}
+ \begin{content}
+   Koden ligger her : https://github.com/aslakjo/scala\_intro\_kurs
+   
+   \begin{itemize}
+     \item Last ned   
+     \item Gå til katalogen og kjør 
+     	\subitem{sbt}
+     \item I sbt kjør
+     	\subitem{ update}
+     	\subitem{\textasciitilde test-quick}
+   \end{itemize}
+
+ \end {content}
+\end{frame}
 
 \begin{frame}{Case classes}
   \begin{content}
   	En case classe er en normal klasse med masse ekstrautstyr 
   	\begin{itemize}
+  		\item Genererer geters og seters
 	  	\item Hash code og equals er implementert korrekt, og på bakgrunn av verdiene
 	  	\item Det companion object er laget
 	  	\item Unapply / extractors er laget
@@ -151,7 +336,7 @@
     \fontsize{1}{1}
     \selectfont
     BEKK CONSULTING AS\\
-S   KUR 39, VIPPETANGEN. P.O. BOX 134 SENTRUM, 0102 OSLO, NORWAY. WWW.BEKK.NO\\
+    SKUR 39, VIPPETANGEN. P.O. BOX 134 SENTRUM, 0102 OSLO, NORWAY. WWW.BEKK.NO\\
   \end{centering}
 \end{frame}
 
