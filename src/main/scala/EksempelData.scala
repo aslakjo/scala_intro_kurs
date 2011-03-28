@@ -1,4 +1,4 @@
-
+package eksempeldata
 
 object EksempelData{
   val liste1 = List(1,2,3)

@@ -1,6 +1,10 @@
+package advanced.oppgaver
+
 
 import org.scalatest.Spec
 import org.scalatest.matchers.ShouldMatchers
+
+import eksempeldata._
 
 class Oppgaver extends Spec with ShouldMatchers {
 
