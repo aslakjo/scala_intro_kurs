@@ -15,17 +15,482 @@
 
 \author{Aslak Johannessen \\ aslakjo@bekk.no  @aslakjo}
 
-\title[Scala kurs]{BEKK Consulting}
+\title[Scala kurs]{Fagkveld hos BEKK -- Scala}
+\subtitle[]{Introduksjon til scala}
 \institute{BEKK Consulting AS}
 
 
 \begin{document}
+
+\maketitle
+
+\begin{frame}{Velkommen}
+  \begin{content}
+    \begin{itemize}
+  		\item Hvorfor scala?
+	  	\item Kurs
+		  	\subitem{Litt foiler}
+         	  	\subitem{Litt oppgaver}         	  	
+         	  	\subitem{Repeat!}
+	  	\item Middag
+	\end{itemize}
+  \end{content}
+\end{frame}
+
+\begin{frame}{Oss}
+\begin{content}
+\centering
+  \includegraphics[width=7em]{rune}  
+  \includegraphics[width=7em]{eivind}  
+  \includegraphics[width=7em]{oc}  \\
+  \includegraphics[width=7em]{torbjorn}  
+  \includegraphics[width=7em]{kai}  
+  \includegraphics[width=7em]{aslak} 
+  \end{content} 
+\end{frame}
+
+\kontrast{Hvorfor scala?}
+
+\kontrast{Hvorfor scala?\small\\\hfill\\Java er gammelt\\Scala er et riktig steg videre\\Bedre konsepter $\equiv$ bedre kode}
+
+\begin{frame}[containsverbatim]{Gammelt}
+ \begin{content}
+    \begin{lstlisting}[basicstyle={\tiny\ttfamily}]	   
+public class Person{
+    private String navn;
+    private String etternavn;
+    private Integer alder;
+
+    public Person(String fornavn, String etternavn, Integer alder){
+        this.navn = fornavn;
+        this.etternavn = etternavn;
+        this.alder = alder;
+    }
+
+    public String fulltNavn(){
+        return navn + " " + etternavn;
+    }
+
+    public String getNavn(){ return navn; }
+    public void setNavn(String navn){ this.navn = navn; }
+
+    public String getEtternavn(){ return etternavn; }
+    public void setEtternavn(String etternavn){ this.etternavn = etternavn; }
+
+    public Integer getAlder(){ return alder; }
+    public void setAlder(Integer alder){ this.alder = alder; }
+}
+     \end{lstlisting}
+  \end {content}
+\end{frame}
+
+\begin{frame}[containsverbatim]{Nytt}
+ \begin{content}
+    \begin{lstlisting}[basicstyle={\small\ttfamily}]	   
+class Person(
+  val navn:String, 
+  val etternavn:String, 
+  val alder:Int)
+{
+  def fulltNavn ={
+    "%s %s".format(navn, etternavn) 
+  }
+}
+     \end{lstlisting}
+  \end {content}
+\end{frame}
+
+\kontrast{Closure}
+
+
+\begin{frame}[containsverbatim]{Gammelt}
+ \begin{content}
+    \begin{lstlisting}[basicstyle={\small\ttfamily}]	   
+public List<String> interesse(String starterMed){
+  List<String> interesser = new ArrayList<String>();
+  interesser.add("Gym");
+  interesser.add("Sykkel");
+  interesser.add("Scala");
+  interesser.add("Vask");
+  interesser.add("Mat");
+
+  List<String> valgte = new ArrayList<String>();
+  for(String interesse : interesser){
+    if(interesse.startsWith(starterMed)){
+      valgte.add(interesse);
+    }
+  }
+
+  return valgte;
+}
+     \end{lstlisting}
+  \end {content}
+\end{frame}
+
+\begin{frame}[containsverbatim]{Nytt}
+ \begin{content}
+    \begin{lstlisting}[basicstyle={\small\ttfamily}]	   
+val interesser = List(
+   "Gym", "Sykkel", "Scala", 
+   "Vask", "Mat"
+)
+
+def interesse(starterMed:String) = interesser.filter(
+  (s:String) => s.startsWith(starterMed)
+)
+     \end{lstlisting}
+  \end {content}
+\end{frame}
+
+
+\begin{frame}[containsverbatim]{Scala på JVM}
+ \begin{content}
+   Scala er egentlig bare java, pluss en jar.\\
+   \includegraphics[height=17em]{jvm}
+ \end {content}
+\end{frame}
+
+\begin{frame}[containsverbatim]{Helt grunnleggende -- Klasser}
+ \begin{content}
+\begin{lstlisting}[basicstyle={\small\ttfamily}]	   
+class Person( //Konstruktørparametere og instansevariabler
+   navn:String, 
+   etternavn:String, 
+   alder:Int)
+{
+  //Konstruktør
+  val interesser = List("ting", "og", "tang") 
+  val cv = "%s %s -- %s\n Liker: %s".format(
+    navn, etternavn, alder, interesser.mkString(", ")
+  )
+  
+  
+  def fulltNavn ={ //Funksjon
+    "%s %s".format(navn, etternavn) 
+  }
+}
+     \end{lstlisting}
+ \end {content}
+\end{frame}
+
+\begin{frame}[containsverbatim]{Helt grunnleggende -- val og var}
+ \begin{content}
+\begin{lstlisting}[basicstyle={\small\ttfamily}]	   
+
+ //Er slik for altid
+  val interesser = List("ting", "og", "tang") 
+  
+  def mineInteresser ={ 
+    var interesser = "" //Kan tilordnes på nytt
+    for(interesse <- interesser){
+    	interesser += interesse + ", "
+    }
+    
+    interesser
+  }
+}
+     \end{lstlisting}
+ \end {content}
+\end{frame}
+
+\begin{frame}[containsverbatim]{Helt grunnleggende -- Oppgaver}
+ \begin{content}
+   Koden ligger her : https://github.com/aslakjo/scala\_intro\_kurs
+   
+   \begin{itemize}
+     \item Last ned   
+     \item Gå til katalogen og kjør 
+     	\subitem{sbt}
+     \item I sbt kjør
+     	\subitem{ update}
+     	\subitem{\textasciitilde test-quick}
+   \end{itemize}
+ \end {content}
+\end{frame}
+
+\begin{frame}[containsverbatim]{Oppgavene}
+ \begin{content}
+ \begin{lstlisting}[basicstyle={\small\ttfamily}]	
+  describe("Variabler"){
+    it ("definere en string variabel"){
+      // -- fyll inn
+      // enStreng.isInstanceOf[String] should be (true)
+      fail
+    }
+
+    it ("definer en variabel som kan endre seg"){
+      var sum = 0
+      // -- fyll inn
+      sum should be (10)
+    }
+  }
+  \end{lstlisting}
+  -- Les eksempel koden\\
+  -- Kommenter inn du har lyst på, fjern eventuelle fail\\
+  --> Få testen til bli grønn
+ \end {content}
+\end{frame}
+
+\kontrast{3 + 5}
+
+
+\begin{frame}[containsverbatim]{Operator overload}
+ \begin{content}
+ 	\begin{lstlisting}[basicstyle={\small\ttfamily}]	
+//Scala listeoperator ::
+val tog = new Vogn :: new Vogn :: new Vogn :: Nil 	
+ 	
+class Vogn {
+  def +(vogn: Vogn) = List(this, vogn)
+}
+
+// Vår egen syntaks
+val tog = new Vogn + new Vogn
+     \end{lstlisting}
+ \end {content}
+\end{frame}
+
+\begin{frame}[containsverbatim]{Operator overload}
+ \begin{content}
+ 	\begin{lstlisting}[basicstyle={\small\ttfamily}]	
+//Scala listeoperator ::
+val tog = new Vogn :: new Vogn :: new Vogn :: Nil 	
+ 	
+class Vogn {
+  def +(vogn: Vogn) = List(this, vogn)
+  def ::(vogn: Vogn) = List(this, vogn)
+}
+
+// Vår egen syntaks
+val tog = new Vogn :: new Vogn :: new Vogn
+     \end{lstlisting}
+ \end {content}
+\end{frame}
+
+\kontrast{start.oppgaver.OperatorOverload}
+
+
+\begin{frame}[containsverbatim]{Typer og scala}
+ \begin{content}
+  	\begin{lstlisting}[basicstyle={\small\ttfamily}]
+val liste1 = List(1,2,3)
+def liste2 = Liste(4,5) //Finner ut hva typen er
+ 
+val nyListe = "Streng" :: liste1 //Kopileringsfeil
+ 	\end{lstlisting}
+ \end {content}
+\end{frame}
+
+\begin{frame}[containsverbatim]{Typer og scala}
+ \begin{content}
+  	\begin{lstlisting}[basicstyle={\small\ttfamily}]
+val liste1 = List(1,2,3)
+//Kreve en spesiell type
+def liste2:List[Int] = Liste(4,5) 
+
+val nyListe = List("Streng", 1,2,4)
+//Ny list får nå [Any] som type
+ 	\end{lstlisting}
+ \end {content}
+\end{frame}
+
+
+\begin{frame}[containsverbatim]{Programeringsstiler}
+ \begin{content}
+   \begin{columns}[c] 
+   	\column{12em}
+   		Imperativ
+   		\begin{itemize}
+   			\item Kan gjenbruke variable
+   			\item Forteller hvordan vi gjør noe
+   			\item Holder på tilstand
+   		\end{itemize}
+   		--> Vi kan fortsette med OO\\
+   		\begin{lstlisting}[basicstyle={\small\ttfamily}]
+for(i <- liste){
+  sum = sum + i
+}
+   		\end{lstlisting}
+	\column{12em}  
+		Funksjonell
+   		\begin{itemize}
+   			\item Ikke kan gjenbruke variable
+   			\item Forteller hva vi skal gjøre
+   			\item Tilstand er forbudt	
+   		\end{itemize}
+   		--> Det blir enklere å bruke flere cpu-kjerner\\
+   		\begin{lstlisting}[basicstyle={\small\ttfamily}]
+liste.foreach(i => {
+  sum = sum + i
+})
+   		\end{lstlisting}
+    \end{columns}
+ \end {content}
+\end{frame}
+
+
+\begin{frame}[containsverbatim]{Programeringsstiler}
+ \begin{content}
+\begin{columns}[c] 
+   	\column{15em}
+   		Imperativ
+   		\begin{lstlisting}[basicstyle={\small\ttfamily}]
+val liste = 
+  List("en", "to", "tre")
+  
+var ropeList = List[String]()
+
+for(i <- liste){
+  ropeList = 
+    "%s!".format(i) :: ropeList
+}
+   		\end{lstlisting}
+	\column{16em}  
+		Funksjonell
+   		\begin{lstlisting}[basicstyle={\small\ttfamily}]
+val liste = 
+  List("en", "to", "tre")
+
+
+def prat2Rop(tekst: String) = 
+  "%s!".format(tekst)
+
+
+val ropeliste = 
+  liste.map(prat2Rop(_))
+   		\end{lstlisting}
+    \end{columns}	   
+ \end {content}
+\end{frame}
+
+\kontrast{start.oppgaver.ProgrammeringsStil}
+
+\begin{frame}[containsverbatim]{Traits}
+ \begin{content}
+	\begin{lstlisting}[basicstyle={\small\ttfamily}]
+object Logger{
+  def error(msg:String) = println ("ÆÆÆ! : " + msg)
+}
+
+class ServiceA{
+  def error(msg: String) = Logger.error(msg)
+}
+class ServiceB{
+  def error(msg: String) = Logger.error(msg)
+}
+class DaoA{
+  def error(msg: String) = Logger.error(msg)
+}
+	\end{lstlisting}
+ \end {content}
+\end{frame}
+
+\begin{frame}[containsverbatim]{Traits}
+ \begin{content}
+	\begin{lstlisting}[basicstyle={\small\ttfamily}]
+object Logger{
+  def error(msg:String) = println ("ÆÆÆ! : " + msg)
+}
+class Logging{
+  def error(msg: String) = Logger.error(msg)
+}
+
+class ServiceA extends Logging{}
+class ServiceB extends Logging{} 
+class DaoA extends Logging{} 
+	\end{lstlisting}
+ \end {content}
+\end{frame}
+
+\begin{frame}[containsverbatim]{Traits}
+ \begin{content}
+	\begin{lstlisting}[basicstyle={\small\ttfamily}]
+object Logger{
+  def error(msg:String) = println ("ÆÆÆ! : " + msg)
+}
+class Logging{
+  def error(msg: String) = Logger.error(msg)
+}
+
+class ServiceA extends Logging{}
+class ServiceB extends Logging{} 
+//Hva hvis denne skal arve av noe annet
+class DaoA extends Logging{} 
+	\end{lstlisting}
+ \end {content}
+\end{frame}
+
+
+\begin{frame}[containsverbatim]{Traits}
+ \begin{content}
+	\begin{lstlisting}[basicstyle={\small\ttfamily}]
+object Logger{
+  def error(msg:String) = println ("ÆÆÆ! : " + msg)
+}
+
+trait Loggable{
+  def error(msg: String) = Logger.error(msg)
+}
+
+class ServiceA extends Loggable{  }
+class ServiceB extends Loggable{  }
+class DaoA extends SuperDuperDao with Loggable{  }
+	\end{lstlisting}
+ \end {content}
+\end{frame}
+
+\begin{frame}[containsverbatim]{Traits}
+ \begin{content}
+	\begin{lstlisting}[basicstyle={\small\ttfamily}]
+object Logger{
+  def error(msg:String) = println ("ÆÆÆ! : " + msg)
+}
+
+trait Loggable{
+  def error(msg: String) = Logger.error(msg)
+}
+
+class ServiceA extends Loggable{  }
+class ServiceB extends Loggable{  }
+class DaoA extends SuperDuperDao with Loggable{  }
+
+//Kan også mixes inn ved new
+val daoB = new DaoB with Loggable
+	\end{lstlisting}
+ \end {content}
+\end{frame}
+
+\kontrast{start.oppgaver.Traits}
+
+
+\begin{frame}[containsverbatim]{Utvidbarhet}
+ \begin{content}
+ \begin{lstlisting}[basicstyle={\small\ttfamily}]
+  val list = List(1,2,3)
+  list(0) == 1 //samme som list.apply(0)
+ 
+   val to = 1 + 1 // sammen som 1.+(1)
+  \end{lstlisting}
+  
+  Reglene er for alle.\\
+  Fleksibiliteten er stor.\\
+  --> Gjør det mulig å utvidescala som et scala bibliotek. \\
+  \hfill\\
+  feks. Actors og continuations.   
+ \end {content}
+\end{frame}
+
+\kontrast{start.oppgaver.Utvidbarhet}
+
+
+\kontrast{Mer avanserte oppgaver}
 
 
 \begin{frame}{Case classes}
   \begin{content}
   	En case classe er en normal klasse med masse ekstrautstyr 
   	\begin{itemize}
+  		\item Genererer geters og seters
 	  	\item Hash code og equals er implementert korrekt, og på bakgrunn av verdiene
 	  	\item Det companion object er laget
 	  	\item Unapply / extractors er laget
@@ -151,7 +616,7 @@
     \fontsize{1}{1}
     \selectfont
     BEKK CONSULTING AS\\
-S   KUR 39, VIPPETANGEN. P.O. BOX 134 SENTRUM, 0102 OSLO, NORWAY. WWW.BEKK.NO\\
+    SKUR 39, VIPPETANGEN. P.O. BOX 134 SENTRUM, 0102 OSLO, NORWAY. WWW.BEKK.NO\\
   \end{centering}
 \end{frame}
 

@@ -1,6 +1,8 @@
 import org.scalatest.Spec
 import org.scalatest.matchers.ShouldMatchers
 
+import eksempeldata._
+
 class Oppgaver extends Spec with ShouldMatchers {
 
   describe("Oppgaver - ") {
@@ -9,32 +11,35 @@ class Oppgaver extends Spec with ShouldMatchers {
 
     describe("oppgave 1 - looping ") {
 
-      ignore("imperativt") {
+      it("imperativt") {
         var i = 0
 
         //loop over tallFra1Til10 med en for løkke
 
         i should be(10)
+        fail
       }
 
-      ignore("funksjonelt") {
+      it("funksjonelt") {
 
         val i = 0 //loop over tallFra1Til10 imperativt
 
         i should be(10)
+        fail
       }
 
     }
 
     describe("oppgave 2 - jobbe med lister") {
 
-      ignore("lag en liste") {
+      it("lag en liste") {
         val liste = Nil
 
         liste should not be ('empty)
+        fail
       }
 
-      ignore("\"legg\" til et element") {
+      it("\"legg\" til et element") {
 
         var liste = EksempelData.liste1
 
@@ -42,9 +47,10 @@ class Oppgaver extends Spec with ShouldMatchers {
         val resultatListe = Nil
 
         resultatListe.size should be(4)
+        fail
       }
 
-      ignore("konkatinasjon") {
+      it("konkatinasjon") {
         val liste1 = EksempelData.liste1
         val liste2 = EksempelData.liste2
 
@@ -53,29 +59,32 @@ class Oppgaver extends Spec with ShouldMatchers {
 
         resultatListe.mkString(",") should be("1,2,3,4,5,6")
         liste1.mkString(",") should be("1,2,3")
+        fail
       }
 
-      ignore("gang hvert element med 2") {
+      it("gang hvert element med 2") {
         val tall = EksempelData.tallFraEnTilFem
 
         val dobleTall = Nil //Hint: map(_)
 
         dobleTall.mkString(",") should be("2,4,6,8,10")
+        fail
       }
 
-      ignore("finn alle oddetal") {
+      it("finn alle oddetal") {
         val tall = EksempelData.tallFraEnTilFem
 
         val oddeTall = Nil
 
         oddeTall.mkString(",") should be("1,3,5")
+        fail
       }
     }
 
 
     describe("oppgave 3 - tupler") {
 
-      ignore("lag en tuple med to verdier") {
+      it("lag en tuple med to verdier") {
         var tuple: Tuple2[Int, Int] = null
 
         val forsteVerdi = 1
@@ -83,9 +92,10 @@ class Oppgaver extends Spec with ShouldMatchers {
 
         tuple._1 should be(1)
         tuple._2 should be(2)
+        fail
       }
 
-      ignore("skal returnere to verdier fra en funksjon") {
+      it("skal returnere to verdier fra en funksjon") {
         def multipleReturn: Tuple2[Int, Int] = null
 
         val en, to = multipleReturn
@@ -93,9 +103,10 @@ class Oppgaver extends Spec with ShouldMatchers {
 
         en should be(1)
         to should be(2)
+        fail
       }
 
-      ignore("populer en HashMap ved hjelp av tupler ") {
+      it("populer en HashMap ved hjelp av tupler ") {
         import scala.collection.mutable.HashMap
         val map = new HashMap[String, Int]()
 
@@ -103,19 +114,21 @@ class Oppgaver extends Spec with ShouldMatchers {
 
         map("en") should be(1)
         map("to") should be(2)
+        fail
       }
 
-      ignore("populer en imutable Map ved hjelp av tupler ") {
+      it("populer en imutable Map ved hjelp av tupler ") {
         val map = Map[String, Int]() //fyll på med elementer
 
         map("tre") should be(3)
         map("fire") should be(4)
+        fail
       }
 
     }
 
     describe("oppgave 4 - case classes") {
-      ignore("lag en person") {
+      it("lag en person") {
         val person = null
 
         person_har_navn_og_alder(person)
@@ -125,23 +138,26 @@ class Oppgaver extends Spec with ShouldMatchers {
           person.navn should not be ('empty)
           person.alder should be > 0
         }
+        fail
       }
 
-      ignore("implementer person slik at to med likt navn og alder er identiske(equals)") {
+      it("implementer person slik at to med likt navn og alder er identiske(equals)") {
         val person1: AnyRef = null
         val person2: AnyRef = ""
 
         person1 should equal(person2)
+        fail
       }
 
-      ignore("implement person slik at hash code er ihenhold til java standard") {
+      it("implement person slik at hash code er ihenhold til java standard") {
         val person1: AnyRef = null
         val person2: AnyRef = ""
 
         person1.hashCode should equal(person2.hashCode)
+        fail
       }
 
-      ignore("kopier en person inn i en annen variabel (egentlig ikke en case class greie)") {
+      it("kopier en person inn i en annen variabel (egentlig ikke en case class greie)") {
         val person1: navnOgAlder = null
         val person2: navnOgAlder = null
 
@@ -156,42 +172,47 @@ class Oppgaver extends Spec with ShouldMatchers {
           a.navn should equal(b.navn)
           a.alder should equal(b.alder)
         }
+        fail
       }
     }
 
     describe("oppgave 5 - pattern matching") {
-      ignore("Finn alle blomster over 20 cm") {
+      it("Finn alle blomster over 20 cm") {
         val hoyeBlomster = EksempelData.blomster
         hoyeBlomster.foreach(_.hoyde should be > (20))
+        fail
       }
 
-      ignore("Finn alle pene blomster(som har Pen som superklasse)") {
+      it("Finn alle pene blomster(som har Pen som superklasse)") {
         val peneBlomster: List[Blomst] = EksempelData.blomster
 
         peneBlomster.size should be(2)
         peneBlomster should not contain (Blomst("Løvetan", 8, Utseende(Farge("Gul"))))
+        fail
       }
 
-      ignore("Hent fargen på blomsten") {
+      it("Hent fargen på blomsten") {
         val farger: List[String] = null //EksempelData.blomster.map
 
         farger should be(List("Rød", "Blå", "Gul"))
+        fail
       }
 
     }
 
     describe("oppgave 6 - traits") {
 
-      ignore("Finn den største bukkene bruse") {
+      it("Finn den største bukkene bruse") {
         val bukkene = EksempelData.bukkeneBruse
 
         val størsteBukken: Bukk = bukkene(0)
         //Hint: bruk max() på lista og legg til Ordered-traitet på Bukk-klassen
 
         størsteBukken.navn should be ("Største")
+        fail
       }
 
-      ignore("Få bukken til å trampe på brua") {
+      it("Få bukken til å trampe på brua") {
 
         val enBukk = null
 
@@ -199,9 +220,10 @@ class Oppgaver extends Spec with ShouldMatchers {
 
         // kommenteres inn
         // enBukk.trampe should be ("Tramp tramp!")
+        fail
       }
 
-      ignore("Få bukken til å stange trollet") {
+      it("Få bukken til å stange trollet") {
 
         val enBukk = null
 
@@ -209,14 +231,16 @@ class Oppgaver extends Spec with ShouldMatchers {
 
         // kommenteres inn
         // enBukk.stange should be ("Trollet")
+        fail
       }
 
-      ignore("Lag en geitekilling som sier 'meee'") {
+      it("Lag en geitekilling som sier 'meee'") {
 
         // Hint: her må man lage en egen BukkSomKilling-klasse og bruke "stackable"-traitet Killing
         val killing = new Bukk("bitteLille", "XS")
 
         killing.siMæ should be ("meeee")
+        fail
 
       }
 

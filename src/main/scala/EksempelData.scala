@@ -1,3 +1,4 @@
+package eksempeldata
 
 object EksempelData{
 
@@ -28,7 +29,8 @@ case class Farge(val navn:String)
 case class Blomst(val navn:String, val hoyde:Int, val utseende:Utseende)
 
 // Traits-oppgavene
-case class Bukk(navn: String, størrelse: String) {
+case class Bukk(navn: String, størrelse: String) extends Ordered[Bukk] {
+  override  def compare(other:Bukk) = other.størrelse compareTo størrelse
   def siMæ = "MÆÆÆÆ"
 }
 

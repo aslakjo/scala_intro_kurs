@@ -1,8 +1,7 @@
-import com.withoutincident.sbt.GrowlTestListenerPlugin
 import io.Source
 import sbt._
 
-class ScalaIntroKurs(info: ProjectInfo) extends DefaultProject(info) with IdeaProject with GrowlTestListenerPlugin with ScoreBoardPublish {
+class ScalaIntroKurs(info: ProjectInfo) extends DefaultProject(info) with IdeaProject with ScoreBoardPublish {
   val scalatest = "org.scalatest" % "scalatest" % "1.3"
 
   val host = "localhost"
