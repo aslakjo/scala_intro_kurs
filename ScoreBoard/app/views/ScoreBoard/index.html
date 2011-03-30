@@ -4,8 +4,8 @@
 #{set refresh:'JavaScript:timedRefresh(1000);' /}
 
 <h1>Score board</h1>
-<ul>
-    #{list items:scoreBoard, as:'scoreline' }
-        <li>${scoreline}</li>
+<div>
+    #{list scoreBoard }
+        <p>${_.raw()}</p>
     #{/list}
-</ul>
+</div>

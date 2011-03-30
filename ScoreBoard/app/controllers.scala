@@ -1,26 +1,27 @@
 package controllers
 
 import play.mvc._
-import reflect.Template
-
 object ScoreKeeper {
   var scoreMap = Map[String, (Int, Int, Int)]()
 }
 
 object ScoreBoard extends Controller {
 
-    def index = {
-       ScoreKeeper.scoreMap match {
-         case m: Map[String, (Int, Int, Int)] => {val scoreBoard = createScoreBoard(m); Template(scoreBoard)}
-         case _ => throw new ClassCastException
-       }
-    }
-
-    private def createScoreBoard(map: Map[String, (Int, Int, Int)]) = {
-      map.foldLeft(List[String]()) {
-        case (l,(key,value)) => "Team: "+key+" Passed: "+value._1+" Failed: "+value._2+" Skipped: "+value._3 :: l
+  def index = {
+    ScoreKeeper.scoreMap match {
+      case m: Map[String, (Int, Int, Int)] => {
+        val scoreBoard = createScoreBoard(m); Template(scoreBoard)
       }
+      case _ => throw new ClassCastException
     }
+  }
+
+  private def createScoreBoard(map: Map[String, (Int, Int, Int)]) = {
+    map.foldLeft(List[String]()) {
+      case (l, (key, value)) => "[<span id='team'>" + key + "</span>] Passed: <span id='passed'>" + value._1 + "</span> Failed: <span id='failed'>" + value._2 + "</span> " +
+        "Skipped: <span id='skipped'>" + value._3+"</span>" :: l
+    }
+  }
 }
 
 object PublishScore extends Controller {
