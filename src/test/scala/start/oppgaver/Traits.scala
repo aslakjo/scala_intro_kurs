@@ -5,7 +5,7 @@ import org.scalatest.matchers.ShouldMatchers
 
 import model._
 
-class MultipleArv extends Spec with ShouldMatchers {
+class Traits extends Spec with ShouldMatchers {
   describe("Multiple arv -- traits"){
     type BilMedKran = {
       def harKran:Boolean

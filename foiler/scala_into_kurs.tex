@@ -30,20 +30,23 @@
   		\item Hvorfor scala?
 	  	\item Kurs
 		  	\subitem{Litt foiler}
-         	  	\subitem{Litt oppgaver}
+         	  	\subitem{Litt oppgaver}         	  	
+         	  	\subitem{Repeat!}
 	  	\item Middag
 	\end{itemize}
   \end{content}
 \end{frame}
 
 \begin{frame}{Oss}
-Rune
-Eivind
-Ole Christian
-Torbjørn
-Kai
-Stein Kåre
-Aslak
+\begin{content}
+\centering
+  \includegraphics[width=7em]{rune}  
+  \includegraphics[width=7em]{eivind}  
+  \includegraphics[width=7em]{oc}  \\
+  \includegraphics[width=7em]{torbjorn}  
+  \includegraphics[width=7em]{kai}  
+  \includegraphics[width=7em]{aslak} 
+  \end{content} 
 \end{frame}
 
 \kontrast{Hvorfor scala?}
@@ -142,7 +145,7 @@ def interesse(starterMed:String) = interesser.filter(
 
 \begin{frame}[containsverbatim]{Scala på JVM}
  \begin{content}
-   Scala er egentlig bare java, plus en jar.\\
+   Scala er egentlig bare java, pluss en jar.\\
    \includegraphics[height=17em]{jvm}
  \end {content}
 \end{frame}
@@ -212,6 +215,7 @@ class Person( //Konstruktørparametere og instansevariabler
     it ("definere en string variabel"){
       // -- fyll inn
       // enStreng.isInstanceOf[String] should be (true)
+      fail
     }
 
     it ("definer en variabel som kan endre seg"){
@@ -222,7 +226,7 @@ class Person( //Konstruktørparametere og instansevariabler
   }
   \end{lstlisting}
   -- Les eksempel koden\\
-  -- Kommenter inn eksempel kode, hvis ønskelig\\
+  -- Kommenter inn du har lyst på, fjern eventuelle fail\\
   --> Få testen til bli grønn
  \end {content}
 \end{frame}
@@ -233,7 +237,7 @@ class Person( //Konstruktørparametere og instansevariabler
 \begin{frame}[containsverbatim]{Operator overload}
  \begin{content}
  	\begin{lstlisting}[basicstyle={\small\ttfamily}]	
-//Scala liste opperator ::
+//Scala listeoperator ::
 val tog = new Vogn :: new Vogn :: new Vogn :: Nil 	
  	
 class Vogn {
@@ -249,7 +253,7 @@ val tog = new Vogn + new Vogn
 \begin{frame}[containsverbatim]{Operator overload}
  \begin{content}
  	\begin{lstlisting}[basicstyle={\small\ttfamily}]	
-//Scala liste opperator ::
+//Scala listeoperator ::
 val tog = new Vogn :: new Vogn :: new Vogn :: Nil 	
  	
 class Vogn {
@@ -265,22 +269,97 @@ val tog = new Vogn :: new Vogn :: new Vogn
 
 \kontrast{start.oppgaver.OperatorOverload}
 
+
 \begin{frame}[containsverbatim]{Typer og scala}
  \begin{content}
-   Type inferense.\\
-   Sterke type systemer.\\
-   Automatisk konvertering.
+  	\begin{lstlisting}[basicstyle={\small\ttfamily}]
+val liste1 = List(1,2,3)
+def liste2 = Liste(4,5) //Finner ut hva typen er
+ 
+val nyListe = "Streng" :: liste1 //Kopileringsfeil
+ 	\end{lstlisting}
  \end {content}
 \end{frame}
 
+\begin{frame}[containsverbatim]{Typer og scala}
+ \begin{content}
+  	\begin{lstlisting}[basicstyle={\small\ttfamily}]
+val liste1 = List(1,2,3)
+//Kreve en spesiell type
+def liste2:List[Int] = Liste(4,5) 
+
+val nyListe = List("Streng", 1,2,4)
+//Ny list får nå [Any] som type
+ 	\end{lstlisting}
+ \end {content}
+\end{frame}
+
+
 \begin{frame}[containsverbatim]{Programeringsstiler}
  \begin{content}
-   Funksjonell \\
-   Ingen sideeffekter\\
-   Imperativ\\
-   Mindre og derfor mer gjenbrukbare komponenter\\
-   Enklere å teste\\
-   
+   \begin{columns}[c] 
+   	\column{12em}
+   		Imperativ
+   		\begin{itemize}
+   			\item Kan gjenbruke variable
+   			\item Forteller hvordan vi gjør noe
+   			\item Holder på tilstand
+   		\end{itemize}
+   		--> Vi kan fortsette med OO\\
+   		\begin{lstlisting}[basicstyle={\small\ttfamily}]
+for(i <- liste){
+  sum = sum + i
+}
+   		\end{lstlisting}
+	\column{12em}  
+		Funksjonell
+   		\begin{itemize}
+   			\item Ikke kan gjenbruke variable
+   			\item Forteller hva vi skal gjøre
+   			\item Tilstand er forbudt	
+   		\end{itemize}
+   		--> Det blir enklere å bruke flere cpu-kjerner\\
+   		\begin{lstlisting}[basicstyle={\small\ttfamily}]
+liste.foreach(i => {
+  sum = sum + i
+})
+   		\end{lstlisting}
+    \end{columns}
+ \end {content}
+\end{frame}
+
+
+\begin{frame}[containsverbatim]{Programeringsstiler}
+ \begin{content}
+\begin{columns}[c] 
+   	\column{15em}
+   		Imperativ
+   		\begin{lstlisting}[basicstyle={\small\ttfamily}]
+val liste = 
+  List("en", "to", "tre")
+  
+var ropeList = List[String]()
+
+for(i <- liste){
+  ropeList = 
+    "%s!".format(i) :: ropeList
+}
+   		\end{lstlisting}
+	\column{16em}  
+		Funksjonell
+   		\begin{lstlisting}[basicstyle={\small\ttfamily}]
+val liste = 
+  List("en", "to", "tre")
+
+
+def prat2Rop(tekst: String) = 
+  "%s!".format(tekst)
+
+
+val ropeliste = 
+  liste.map(prat2Rop(_))
+   		\end{lstlisting}
+    \end{columns}	   
  \end {content}
 \end{frame}
 
@@ -288,23 +367,121 @@ val tog = new Vogn :: new Vogn :: new Vogn
 
 \begin{frame}[containsverbatim]{Traits}
  \begin{content}
-    Gir mulighet for å spesifisere oppførsel/egenskaper\\
-    Disse kan brukes på tværs av klasser \\
-    Kan mixes inn når det er behov, eller som en del av typen\\
+	\begin{lstlisting}[basicstyle={\small\ttfamily}]
+object Logger{
+  def error(msg:String) = println ("ÆÆÆ! : " + msg)
+}
+
+class ServiceA{
+  def error(msg: String) = Logger.error(msg)
+}
+class ServiceB{
+  def error(msg: String) = Logger.error(msg)
+}
+class DaoA{
+  def error(msg: String) = Logger.error(msg)
+}
+	\end{lstlisting}
+ \end {content}
+\end{frame}
+
+\begin{frame}[containsverbatim]{Traits}
+ \begin{content}
+	\begin{lstlisting}[basicstyle={\small\ttfamily}]
+object Logger{
+  def error(msg:String) = println ("ÆÆÆ! : " + msg)
+}
+class Logging{
+  def error(msg: String) = Logger.error(msg)
+}
+
+class ServiceA extends Logging{}
+class ServiceB extends Logging{} 
+class DaoA extends Logging{} 
+	\end{lstlisting}
+ \end {content}
+\end{frame}
+
+\begin{frame}[containsverbatim]{Traits}
+ \begin{content}
+	\begin{lstlisting}[basicstyle={\small\ttfamily}]
+object Logger{
+  def error(msg:String) = println ("ÆÆÆ! : " + msg)
+}
+class Logging{
+  def error(msg: String) = Logger.error(msg)
+}
+
+class ServiceA extends Logging{}
+class ServiceB extends Logging{} 
+//Hva hvis denne skal arve av noe annet
+class DaoA extends Logging{} 
+	\end{lstlisting}
+ \end {content}
+\end{frame}
+
+
+\begin{frame}[containsverbatim]{Traits}
+ \begin{content}
+	\begin{lstlisting}[basicstyle={\small\ttfamily}]
+object Logger{
+  def error(msg:String) = println ("ÆÆÆ! : " + msg)
+}
+
+trait Loggable{
+  def error(msg: String) = Logger.error(msg)
+}
+
+class ServiceA extends Loggable{  }
+class ServiceB extends Loggable{  }
+class DaoA extends SuperDuperDao with Loggable{  }
+	\end{lstlisting}
+ \end {content}
+\end{frame}
+
+\begin{frame}[containsverbatim]{Traits}
+ \begin{content}
+	\begin{lstlisting}[basicstyle={\small\ttfamily}]
+object Logger{
+  def error(msg:String) = println ("ÆÆÆ! : " + msg)
+}
+
+trait Loggable{
+  def error(msg: String) = Logger.error(msg)
+}
+
+class ServiceA extends Loggable{  }
+class ServiceB extends Loggable{  }
+class DaoA extends SuperDuperDao with Loggable{  }
+
+//Kan også mixes inn ved new
+val daoB = new DaoB with Loggable
+	\end{lstlisting}
+ \end {content}
+\end{frame}
+
+\kontrast{start.oppgaver.Traits}
+
+
+\begin{frame}[containsverbatim]{Utvidbarhet}
+ \begin{content}
+ \begin{lstlisting}[basicstyle={\small\ttfamily}]
+  val list = List(1,2,3)
+  list(0) == 1 //samme som list.apply(0)
+ 
+   val to = 1 + 1 // sammen som 1.+(1)
+  \end{lstlisting}
+  
+  Reglene er for alle.\\
+  Fleksibiliteten er stor.\\
+  --> Gjør det mulig å utvidescala som et scala bibliotek. \\
+  \hfill\\
+  feks. Actors og continuations.   
  \end {content}
 \end{frame}
 
 \kontrast{start.oppgaver.Utvidbarhet}
 
-\begin{frame}[containsverbatim]{Utvidbarhet}
- \begin{content}
-   Det finnes få om ingen ting i scala som vi ikke kan gjøre selv.\\
-   Det gjør at vi kan lage ting som om det skulle vært native\\
-   De aller fleste utvidelser av typen bibilioteker og teknikker er en jar/avhenighet\\ 
-     --> ikke en ny versjon av språket\\
-   
- \end {content}
-\end{frame}
 
 \kontrast{Mer avanserte oppgaver}
 
