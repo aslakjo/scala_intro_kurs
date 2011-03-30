@@ -202,9 +202,112 @@ class Person( //Konstruktørparametere og instansevariabler
      	\subitem{ update}
      	\subitem{\textasciitilde test-quick}
    \end{itemize}
-
  \end {content}
 \end{frame}
+
+\begin{frame}[containsverbatim]{Oppgavene}
+ \begin{content}
+ \begin{lstlisting}[basicstyle={\small\ttfamily}]	
+  describe("Variabler"){
+    it ("definere en string variabel"){
+      // -- fyll inn
+      // enStreng.isInstanceOf[String] should be (true)
+    }
+
+    it ("definer en variabel som kan endre seg"){
+      var sum = 0
+      // -- fyll inn
+      sum should be (10)
+    }
+  }
+  \end{lstlisting}
+  -- Les eksempel koden\\
+  -- Kommenter inn eksempel kode, hvis ønskelig\\
+  --> Få testen til bli grønn
+ \end {content}
+\end{frame}
+
+\kontrast{3 + 5}
+
+
+\begin{frame}[containsverbatim]{Operator overload}
+ \begin{content}
+ 	\begin{lstlisting}[basicstyle={\small\ttfamily}]	
+//Scala liste opperator ::
+val tog = new Vogn :: new Vogn :: new Vogn :: Nil 	
+ 	
+class Vogn {
+  def +(vogn: Vogn) = List(this, vogn)
+}
+
+// Vår egen syntaks
+val tog = new Vogn + new Vogn
+     \end{lstlisting}
+ \end {content}
+\end{frame}
+
+\begin{frame}[containsverbatim]{Operator overload}
+ \begin{content}
+ 	\begin{lstlisting}[basicstyle={\small\ttfamily}]	
+//Scala liste opperator ::
+val tog = new Vogn :: new Vogn :: new Vogn :: Nil 	
+ 	
+class Vogn {
+  def +(vogn: Vogn) = List(this, vogn)
+  def ::(vogn: Vogn) = List(this, vogn)
+}
+
+// Vår egen syntaks
+val tog = new Vogn :: new Vogn :: new Vogn
+     \end{lstlisting}
+ \end {content}
+\end{frame}
+
+\kontrast{start.oppgaver.OperatorOverload}
+
+\begin{frame}[containsverbatim]{Typer og scala}
+ \begin{content}
+   Type inferense.\\
+   Sterke type systemer.\\
+   Automatisk konvertering.
+ \end {content}
+\end{frame}
+
+\begin{frame}[containsverbatim]{Programeringsstiler}
+ \begin{content}
+   Funksjonell \\
+   Ingen sideeffekter\\
+   Imperativ\\
+   Mindre og derfor mer gjenbrukbare komponenter\\
+   Enklere å teste\\
+   
+ \end {content}
+\end{frame}
+
+\kontrast{start.oppgaver.ProgrammeringsStil}
+
+\begin{frame}[containsverbatim]{Traits}
+ \begin{content}
+    Gir mulighet for å spesifisere oppførsel/egenskaper\\
+    Disse kan brukes på tværs av klasser \\
+    Kan mixes inn når det er behov, eller som en del av typen\\
+ \end {content}
+\end{frame}
+
+\kontrast{start.oppgaver.Utvidbarhet}
+
+\begin{frame}[containsverbatim]{Utvidbarhet}
+ \begin{content}
+   Det finnes få om ingen ting i scala som vi ikke kan gjøre selv.\\
+   Det gjør at vi kan lage ting som om det skulle vært native\\
+   De aller fleste utvidelser av typen bibilioteker og teknikker er en jar/avhenighet\\ 
+     --> ikke en ny versjon av språket\\
+   
+ \end {content}
+\end{frame}
+
+\kontrast{Mer avanserte oppgaver}
+
 
 \begin{frame}{Case classes}
   \begin{content}
