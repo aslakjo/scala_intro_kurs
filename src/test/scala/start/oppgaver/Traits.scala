@@ -7,44 +7,31 @@ import model._
 
 class Traits extends Spec with ShouldMatchers {
   describe("Multiple arv -- traits"){
+
     abstract class Kjøretøy(val antallHjul:Int){
-      def motor:String;
-    }
 
-    class Bil extends  Kjøretøy(4){
-      def motor = "Bensin"
-    }
-
-
-    type BilMedKran = {
-      def harKran:Boolean
     }
 
     it("Lag en bil, altså kjøretøy med 4 hjul -- arv"){
-      val bil:Kjøretøy = new Bil()
+      val bil:Kjøretøy = null // -- fyll inn
 
       bil.antallHjul should be (4)
     }
 
 
     it("Lag en kran bil, en bil med en kran -- mixin"){
-      trait Kran{
-        def harKran = true
-      }
-
-      val kranBil = new Bil with Kran
+      val kranBil = "" // -- fyll inn
 
       kranBil should be('harKran)
     }
 
     it("Lag en bil med disel motor -- overskrive egenskaper"){
-      trait Disel extends Kjøretøy{
-        override def motor ="Disel"
-      }
+      val bil = ""
 
-      val bil = new Bil with Disel
+      // -- fyll inn  
 
-      bil.motor should be("Disel")
+      //bil.motor should be("Disel")
+      fail
     }
   }
 }

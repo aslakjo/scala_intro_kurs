@@ -1,6 +1,3 @@
-package advanced.oppgaver
-
-
 import org.scalatest.Spec
 import org.scalatest.matchers.ShouldMatchers
 
@@ -11,26 +8,25 @@ class Oppgaver extends Spec with ShouldMatchers {
 
   describe("Oppgaver - ") {
 
-    val tallFra1Til10 = Range(1, 11)
+    val tallFra1Til10 = Range(1, 10)
 
     describe("oppgave 1 - looping ") {
 
       it("imperativt") {
         var i = 0
-        for(y <- tallFra1Til10) {
-          i = y
-        }
+
+        //loop over tallFra1Til10 med en for løkke
 
         i should be(10)
+        fail
       }
 
       it("funksjonelt") {
 
-        var i = 0
-
-        tallFra1Til10.foreach(i=_)
+        val i = 0 //loop over tallFra1Til10 imperativt
 
         i should be(10)
+        fail
       }
 
     }
@@ -38,19 +34,21 @@ class Oppgaver extends Spec with ShouldMatchers {
     describe("oppgave 2 - jobbe med lister") {
 
       it("lag en liste") {
-        val liste = List(1)
+        val liste = Nil
 
         liste should not be ('empty)
+        fail
       }
 
       it("\"legg\" til et element") {
 
         var liste = EksempelData.liste1
 
-
-        val resultatListe = 1 :: liste
+        //legg til ett element i lista som inneholder tre elementer
+        val resultatListe = Nil
 
         resultatListe.size should be(4)
+        fail
       }
 
       it("konkatinasjon") {
@@ -58,26 +56,29 @@ class Oppgaver extends Spec with ShouldMatchers {
         val liste2 = EksempelData.liste2
 
         //konkatiner listene
-        val resultatListe = liste1 ::: liste2
+        val resultatListe = Nil
 
         resultatListe.mkString(",") should be("1,2,3,4,5,6")
         liste1.mkString(",") should be("1,2,3")
+        fail
       }
 
       it("gang hvert element med 2") {
         val tall = EksempelData.tallFraEnTilFem
 
-        val dobleTall = tall.map(x => x * 2)
+        val dobleTall = Nil //Hint: map(_)
 
         dobleTall.mkString(",") should be("2,4,6,8,10")
+        fail
       }
 
       it("finn alle oddetal") {
         val tall = EksempelData.tallFraEnTilFem
 
-        val oddeTall = tall.filter(_ % 2 == 1)
+        val oddeTall = Nil
 
         oddeTall.mkString(",") should be("1,3,5")
+        fail
       }
     }
 
@@ -90,46 +91,46 @@ class Oppgaver extends Spec with ShouldMatchers {
         val forsteVerdi = 1
         val andreVerdi = 2
 
-        tuple = (forsteVerdi, andreVerdi)
-
         tuple._1 should be(1)
         tuple._2 should be(2)
+        fail
       }
 
       it("skal returnere to verdier fra en funksjon") {
-        def multipleReturn: Tuple2[Int, Int] = (1,2)
+        def multipleReturn: Tuple2[Int, Int] = null
 
-        val (en, to) = multipleReturn
+        val en, to = multipleReturn
+
 
         en should be(1)
         to should be(2)
+        fail
       }
 
       it("populer en HashMap ved hjelp av tupler ") {
         import scala.collection.mutable.HashMap
         val map = new HashMap[String, Int]()
 
-        map += ("en" -> 1)
-        map.put("to", 2)
+        //legg til de manglende elementer
 
         map("en") should be(1)
         map("to") should be(2)
+        fail
       }
 
       it("populer en imutable Map ved hjelp av tupler ") {
-        val map = Map[String, Int]() + ("tre" -> 3) + ("fire" -> 4)
+        val map = Map[String, Int]() //fyll på med elementer
 
         map("tre") should be(3)
         map("fire") should be(4)
+        fail
       }
 
     }
 
     describe("oppgave 4 - case classes") {
-
-      case class Person(navn: String, alder: Int)
       it("lag en person") {
-        val person = Person("Torbjørn", 32)
+        val person = null
 
         person_har_navn_og_alder(person)
 
@@ -138,26 +139,28 @@ class Oppgaver extends Spec with ShouldMatchers {
           person.navn should not be ('empty)
           person.alder should be > 0
         }
+        fail
       }
 
       it("implementer person slik at to med likt navn og alder er identiske(equals)") {
-        val person1: AnyRef = Person("Torbjørn", 32)
-        val person2: AnyRef = Person("Torbjørn", 32)
+        val person1: AnyRef = null
+        val person2: AnyRef = ""
 
         person1 should equal(person2)
+        fail
       }
 
       it("implement person slik at hash code er ihenhold til java standard") {
-        val person1: AnyRef = Person("Torbjørn", 32)
-        val person2: AnyRef = Person("Torbjørn", 32)
+        val person1: AnyRef = null
+        val person2: AnyRef = ""
 
         person1.hashCode should equal(person2.hashCode)
+        fail
       }
 
       it("kopier en person inn i en annen variabel (egentlig ikke en case class greie)") {
-        val person = Person("Aslak", 12)
-        val person1: navnOgAlder = person
-        val person2: navnOgAlder = person.copy(alder = 12)
+        val person1: navnOgAlder = null
+        val person2: navnOgAlder = null
 
         person1 should not be theSameInstanceAs(person2)
 
@@ -170,36 +173,30 @@ class Oppgaver extends Spec with ShouldMatchers {
           a.navn should equal(b.navn)
           a.alder should equal(b.alder)
         }
+        fail
       }
     }
 
     describe("oppgave 5 - pattern matching") {
       it("Finn alle blomster over 20 cm") {
-        val hoyeBlomster = EksempelData.blomster.filter(blomst => {
-          blomst match {
-            case Blomst(_, hoyde, _) if hoyde > 20 => true
-            case _ => false
-          }
-        })
+        val hoyeBlomster = EksempelData.blomster
         hoyeBlomster.foreach(_.hoyde should be > (20))
+        fail
       }
 
       it("Finn alle pene blomster(som har Pen som superklasse)") {
-        val peneBlomster: List[Blomst] = EksempelData.blomster.filter( _ match {
-          case _:Pen => true
-          case _ => false
-        })
+        val peneBlomster: List[Blomst] = EksempelData.blomster
 
         peneBlomster.size should be(2)
         peneBlomster should not contain (Blomst("Løvetan", 8, Utseende(Farge("Gul"))))
+        fail
       }
 
       it("Hent fargen på blomsten") {
-        val farger: List[String] = EksempelData.blomster.map( _ match {
-          case Blomst(_, _, Utseende(Farge(farge))) => farge
-        })
+        val farger: List[String] = null //EksempelData.blomster.map
 
         farger should be(List("Rød", "Blå", "Gul"))
+        fail
       }
 
     }
@@ -209,38 +206,42 @@ class Oppgaver extends Spec with ShouldMatchers {
       it("Finn den største bukkene bruse") {
         val bukkene = EksempelData.bukkeneBruse
 
-        val størsteBukken: Bukk = bukkene.max
+        val størsteBukken: Bukk = bukkene(0)
         //Hint: bruk max() på lista og legg til Ordered-traitet på Bukk-klassen
 
         størsteBukken.navn should be ("Største")
+        fail
       }
 
       it("Få bukken til å trampe på brua") {
 
-        val enBukk = new Bukk("Aslak", "L") with Tramping {
-          def trampe = "Tramp tramp!"
-        }
+        val enBukk = null
 
-        enBukk.trampe should be ("Tramp tramp!")
+        // Mix inn "interface"-traitet Tramping
+
+        // kommenteres inn
+        // enBukk.trampe should be ("Tramp tramp!")
+        fail
       }
 
       it("Få bukken til å stange trollet") {
 
-        val enBukk = new Bukk("Store", "L") with Stanging {
-          override def stange = "Trollet"
-        }
+        val enBukk = null
 
-        enBukk.stange should be ("Trollet")
+        // Mix inn "method"-interfacet Stanging
+
+        // kommenteres inn
+        // enBukk.stange should be ("Trollet")
+        fail
       }
 
       it("Lag en geitekilling som sier 'meee'") {
 
         // Hint: her må man lage en egen BukkSomKilling-klasse og bruke "stackable"-traitet Killing
-        val killing = new Bukk("bitteLille", "XS"){
-          override def siMæ = "meeee"
-        }
+        val killing = new Bukk("bitteLille", "XS")
 
         killing.siMæ should be ("meeee")
+        fail
 
       }
 

@@ -10,18 +10,14 @@ class Utvidbarhet extends Spec with ShouldMatchers {
   describe("Utvidbart"){
     it("Hent ut første elementet i listen"){
       val liste = List("første", "andre", "tredje")
-      val første = liste(0)
+      val første = "siste" // -- fyll inn
 
       første should be ("første")
     }
 
 
-    class EnIndexertListe(moderListe:List[String]){
-      def apply(i : Int) = moderListe(i-1)
-    }
-
     it("Implementer en egen 1 indexert liste -- implementere apply"){
-      val egenListe = new EnIndexertListe(List("en", "to", "tre"))
+      val egenListe = List("en", "to", "tre") // -- fyll inn
 
       egenListe(2) should be ("to")
     }

@@ -12,24 +12,19 @@ class ProgrammeringsStil extends Spec with ShouldMatchers {
   describe("Programmerings stil"){
     val liste = List(1,2,3,4,5,6,7,8,9,10)
     val summenAvListen = 55
-    describe("Imperativ"){
-      it("skriv ut alle elementene i listen"){
+    describe("Imperativ -- "){
+      it("konkatiner alle elementene i listen"){
         var alle = ""
 
-        for(i <- liste){
-          alle += i
-        }
+        // -- fyll inn
 
         alle should equal ("12345678910")
       }
 
-      it("summere listen"){
+      it("summere alle tallene i listen"){
         var sum = 0
 
-        for(i <- liste)
-        {
-          sum = sum + i
-        }
+        // -- fyll inn
 
         sum should be (summenAvListen)
       }
@@ -37,28 +32,20 @@ class ProgrammeringsStil extends Spec with ShouldMatchers {
 
     }
 
-    describe("funksjonell"){
+    describe("Funksjonell -- "){
       it("skriv ut alle elementene i listen"){
-
-        //Løsnning en
         var alle = ""
-        liste.foreach((s:Int) => alle += s)
-
-        //Løsnning to
-        alle = liste.foldLeft("")((teksten, neste) => teksten + neste)
+        // i første forsøk, behold var
+        // -- fyll inn
 
         alle should equal ("12345678910")
       }
 
       it("summere listen"){
-
-        //Løsning en.
         var sum = 0
-        liste.foreach((i:Int) => sum = sum + i )
 
-        //Løsning to, vanskligere å forstå.
-        sum = 0
-        sum = liste.foldLeft(0)((summen:Int, next:Int) => summen + next)
+        // i første forsøk behold var
+        // -- fyll inn
 
         sum should be(summenAvListen)
       }
