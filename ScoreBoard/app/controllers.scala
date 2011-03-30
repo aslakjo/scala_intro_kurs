@@ -1,37 +1,31 @@
 package controllers
 
-import play._
 import play.mvc._
-import templates.Template
-import akka.actor.ActorRegistry
-import akka.actor.Actor
 import reflect.Template
 
 object ScoreKeeper {
-  val actor = Actor.remote.actorFor("scoreKeeper", "localhost", 9999)
+  var scoreMap = Map[String, (Int, Int, Int)]()
 }
 
 object ScoreBoard extends Controller {
 
     def index = {
-      val scoreMap = (ScoreKeeper.actor !! GetScore).getOrElse(Map.empty)
-       scoreMap match {
-         case m: Map[Int, (Int,Int)] => {val scoreBoard = createScoreBoard(m); Template(scoreBoard)}
+       ScoreKeeper.scoreMap match {
+         case m: Map[String, (Int, Int, Int)] => {val scoreBoard = createScoreBoard(m); Template(scoreBoard)}
          case _ => throw new ClassCastException
        }
     }
 
-    private def createScoreBoard(map: Map[Int, (Int, Int)]) = {
+    private def createScoreBoard(map: Map[String, (Int, Int, Int)]) = {
       map.foldLeft(List[String]()) {
-        case (l,(key,value)) => "Team: "+key+" Riktige: "+value._1+" Feil:"+value._2 :: l
+        case (l,(key,value)) => "Team: "+key+" Passed: "+value._1+" Failed: "+value._2+" Skipped: "+value._3 :: l
       }
     }
 }
 
-object TestClient extends Controller {
+object PublishScore extends Controller {
 
-  def index = {
-    ScoreKeeper.actor ! ReportScore(3, 9, 8)
+  def index(name: String, passed: Int, failed: Int, skipped: Int) = {
+    ScoreKeeper.scoreMap += (name -> (passed, failed, skipped))
   }
-
 }

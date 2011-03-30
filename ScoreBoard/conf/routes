@@ -3,8 +3,8 @@
 # ~~~~
 
 # Home page
-GET     /                                       ScoreBoard.index
-GET     /TestClient                             TestClient.index
+GET     /                                                               ScoreBoard.index
+GET     /team/{name}/passed/{passed}/failed/{failed}/skipped/{skipped}    PublishScore.index
 
 # Map static resources from the /app/public folder to the /public path
 GET     /public/                                staticDir:public

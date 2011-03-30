@@ -10,3 +10,4 @@ project/project.iml
 scala_intro_kurs.iml
 target/
 out/
+ScoreBoard/tmp/*
