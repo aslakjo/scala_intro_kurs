@@ -8,17 +8,6 @@ import model._
 class Utvidbarhet extends Spec with ShouldMatchers {
 
   describe("Utvidbart"){
-    case class Hjul(val navn:String, val tilstand:Int)
-
-    class Bil{
-      val hjulSett = List(høyreForand, venstreForand, høyreBak, venstreBak)
-      def høyreForand = new Hjul("høyre foran", 60)
-      def venstreForand = new Hjul("venstre foran", 60)
-      def høyreBak = new Hjul("høyre bak", 30)
-      def venstreBak = new Hjul("venstre bak", 40)
-
-      def apply(hjul:String):Hjul = hjulSett.find(_.navn == hjul) get
-    }
 
 
     val liste = List("første", "andre", "tredje")
@@ -28,13 +17,15 @@ class Utvidbarhet extends Spec with ShouldMatchers {
       første should be ("første")
     }
 
-    it("hent ut høyre for hjul -- implementere apply"){
-      val bil = new Bil
 
-      bil("høyre foran") should have {
-        'navn ("høyre foran")
-      }
+    class EnIndexertListe(moderListe:List[String]){
+      def apply(i : Int) = moderListe(i-1)
+    }
 
+    it("Implementer en egen 1 indexert liste -- implementere apply"){
+      val egenListe = new EnIndexertListe(List("en", "to", "tre"))
+
+      egenListe(2) should be ("to")
     }
   }
 }

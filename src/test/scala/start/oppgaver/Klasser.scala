@@ -9,27 +9,25 @@ import model._
 
 class Klasser extends Spec with ShouldMatchers {
   describe("Klasser"){
-    case class Person(fornavn:String,
-                      etternavn:String,
-                      alder:Int
-                     ){
-      def fulltNavn = "%s %s".format(fornavn, etternavn)
-    }
+    class Person(val fornavn :String , val alder:Int)
 
     it("definer en person klasse med navn og alder"){
       type NavnOgAlder = {val fornavn:String; val alder:Int}
 
-      val person:NavnOgAlder = new Person("aslak", "jo", 27)
+      val person:NavnOgAlder = new Person("aslak", 27)
 
       person.fornavn should be ("aslak")
       person.alder should be (27)
+      
     }
 
     describe ("Metoder") {
-      it("Sett sammen for og etternavn"){
-        val person = new Person("ole aleksander", "filibombombom", 4)
+      it("Sett sammen for og etter-navn"){
+        val person = null
+        // -- fyll inn
 
-        person.fulltNavn should be ("ole aleksander filibombombom")
+        //person.fulltNavn should be ("ole aleksander filibombombom")
+      
       }
     }
   }

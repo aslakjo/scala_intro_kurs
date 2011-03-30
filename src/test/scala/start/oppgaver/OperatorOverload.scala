@@ -14,15 +14,18 @@ class OperatorOverload extends Spec with ShouldMatchers {
      class Henger(val vekt:Int) extends Vekt
      class LasteBil(val vekt:Int) extends Bil with Vekt{
        def +(henger:Henger) = vekt + henger.vekt
+       def +:(henger: Henger) = vekt + henger.vekt
      }
 
      it("regn total vekt"){
        val bil = new LasteBil(4000)
        val henger = new Henger(3000)
 
-       val totalvekt = bil + henger
+       val totalvekt = henger +: bil
+
 
        totalvekt should be(7000)
+
      }
 
    }
