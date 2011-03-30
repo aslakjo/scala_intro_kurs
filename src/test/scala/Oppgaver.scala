@@ -3,7 +3,6 @@ import org.scalatest.matchers.ShouldMatchers
 
 class Oppgaver extends Spec with ShouldMatchers {
 
-
   describe("Oppgaver - ") {
 
     val tallFra1Til10 = Range(1, 10)

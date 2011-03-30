@@ -1,3 +1,4 @@
+*.un~
 .idea/
 lib_managed/
 project/boot/
