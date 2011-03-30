@@ -7,6 +7,15 @@ import model._
 
 class Traits extends Spec with ShouldMatchers {
   describe("Multiple arv -- traits"){
+    abstract class Kjøretøy(val antallHjul:Int){
+      def motor:String;
+    }
+
+    class Bil extends  Kjøretøy(4){
+      def motor = "Bensin"
+    }
+
+
     type BilMedKran = {
       def harKran:Boolean
     }

@@ -10,16 +10,17 @@ class Variabler extends Spec with ShouldMatchers {
   describe("Variabler"){
 
     it ("definere en string variabel"){
-      // enStreng.isInstanceOf[String] should be (true)
+      val enStreng = "treng"
+      enStreng.isInstanceOf[String] should be (true)
     }
 
     it ("definer en variabel som kan endre seg"){
       var sum = 0
       sum should be (0)
 
-      // -- fyll inn
+      sum = 10
 
-      //sum should be (10)
+      sum should be (10)
     }
 
   }

@@ -8,10 +8,8 @@ import model._
 class Utvidbarhet extends Spec with ShouldMatchers {
 
   describe("Utvidbart"){
-
-
-    val liste = List("første", "andre", "tredje")
     it("Hent ut første elementet i listen"){
+      val liste = List("første", "andre", "tredje")
       val første = liste(0)
 
       første should be ("første")
