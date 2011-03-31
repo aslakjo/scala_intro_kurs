@@ -8,7 +8,7 @@ import model._
 class Utvidbarhet extends Spec with ShouldMatchers {
 
   describe("Utvidbart"){
-    it("Hent ut første elementet i listen"){
+    ignore("Hent ut første elementet i listen"){
       val liste = List("første", "andre", "tredje")
       val første = "siste" // -- fyll inn
 
@@ -16,7 +16,7 @@ class Utvidbarhet extends Spec with ShouldMatchers {
     }
 
 
-    it("Implementer en egen 1 indexert liste -- implementere apply"){
+    ignore("Implementer en egen 1 indexert liste -- implementere apply"){
       val egenListe = List("en", "to", "tre") // -- fyll inn
 
       egenListe(2) should be ("to")

@@ -212,13 +212,12 @@ class Person( //Konstruktørparametere og instansevariabler
  \begin{content}
  \begin{lstlisting}[basicstyle={\small\ttfamily}]	
   describe("Variabler"){
-    it ("definere en string variabel"){
+    ignore ("definere en string variabel"){
       // -- fyll inn
       // enStreng.isInstanceOf[String] should be (true)
-      fail
     }
 
-    it ("definer en variabel som kan endre seg"){
+    ignore ("definer en variabel som kan endre seg"){
       var sum = 0
       // -- fyll inn
       sum should be (10)
@@ -226,7 +225,7 @@ class Person( //Konstruktørparametere og instansevariabler
   }
   \end{lstlisting}
   -- Les eksempel koden\\
-  -- Kommenter inn du har lyst på, fjern eventuelle fail\\
+  -- Endre testen fra ignore  til it \\
   --> Få testen til bli grønn
  \end {content}
 \end{frame}
