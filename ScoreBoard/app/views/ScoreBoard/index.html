@@ -3,9 +3,13 @@
 
 #{set refresh:'JavaScript:timedRefresh(1000);' /}
 
-<h1>Score board</h1>
-<div>
+<div id="main">
+    <h1>Score board</h1>
     #{list scoreBoard }
         <p>${_.raw()}</p>
     #{/list}
 </div>
+
+<p id="footer">
+    Host IP: <strong>${hostAddress}</strong>
+</p>
