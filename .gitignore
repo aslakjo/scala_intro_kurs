@@ -1,3 +1,4 @@
+*.un~
 .idea/
 lib_managed/
 project/boot/
@@ -10,3 +11,4 @@ project/project.iml
 scala_intro_kurs.iml
 target/
 out/
+ScoreBoard/tmp/*

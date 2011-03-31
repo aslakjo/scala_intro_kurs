@@ -1,0 +1,11 @@
+#{extends 'main.html' /}
+#{set title:'Home' /}
+
+#{set refresh:'JavaScript:timedRefresh(1000);' /}
+
+<h1>Score board</h1>
+<div>
+    #{list scoreBoard }
+        <p>${_.raw()}</p>
+    #{/list}
+</div>
