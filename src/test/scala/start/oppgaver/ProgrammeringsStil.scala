@@ -13,7 +13,7 @@ class ProgrammeringsStil extends Spec with ShouldMatchers {
     val liste = List(1,2,3,4,5,6,7,8,9,10)
     val summenAvListen = 55
     describe("Imperativ -- "){
-      it("konkatiner alle elementene i listen"){
+      ignore("konkatiner alle elementene i listen"){
         var alle = ""
 
         // -- fyll inn
@@ -21,7 +21,7 @@ class ProgrammeringsStil extends Spec with ShouldMatchers {
         alle should equal ("12345678910")
       }
 
-      it("summere alle tallene i listen"){
+      ignore("summere alle tallene i listen"){
         var sum = 0
 
         // -- fyll inn
@@ -33,7 +33,7 @@ class ProgrammeringsStil extends Spec with ShouldMatchers {
     }
 
     describe("Funksjonell -- "){
-      it("skriv ut alle elementene i listen"){
+      ignore("skriv ut alle elementene i listen"){
         var alle = ""
         // i første forsøk, behold var
         // -- fyll inn
@@ -41,7 +41,7 @@ class ProgrammeringsStil extends Spec with ShouldMatchers {
         alle should equal ("12345678910")
       }
 
-      it("summere listen"){
+      ignore("summere listen"){
         var sum = 0
 
         // i første forsøk behold var
