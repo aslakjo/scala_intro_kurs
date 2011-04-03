@@ -15,7 +15,7 @@
 
 \author{Aslak Johannessen \\ aslakjo@bekk.no  @aslakjo}
 
-\title[Scala kurs]{Fagkveld hos BEKK -- Scala}
+\title[Scala kurs]{Introduksjon til scala -- Scala}
 \subtitle[]{Introduksjon til scala}
 \institute{BEKK Consulting AS}
 
@@ -37,17 +37,6 @@
   \end{content}
 \end{frame}
 
-\begin{frame}{Oss}
-\begin{content}
-\centering
-  \includegraphics[width=7em]{rune}  
-  \includegraphics[width=7em]{eivind}  
-  \includegraphics[width=7em]{oc}  \\
-  \includegraphics[width=7em]{torbjorn}  
-  \includegraphics[width=7em]{kai}  
-  \includegraphics[width=7em]{aslak} 
-  \end{content} 
-\end{frame}
 
 \kontrast{Hvorfor scala?}
 
@@ -233,7 +222,9 @@ class Person( //Konstruktørparametere og instansevariabler
  \end {content}
 \end{frame}
 
+
 \kontrast{3 + 5}
+\kontrast{(3).+(5)}
 
 
 \begin{frame}[containsverbatim]{Operator overload}
@@ -243,7 +234,7 @@ class Person( //Konstruktørparametere og instansevariabler
 val tog = new Vogn :: new Vogn :: new Vogn :: Nil 	
  	
 class Vogn {
-  def +(vogn: Vogn) = List(this, vogn)
+  def +(vogn: Vogn) = this :: vogn :: Nil
 }
 
 // Vår egen syntaks
@@ -259,8 +250,8 @@ val tog = new Vogn + new Vogn
 val tog = new Vogn :: new Vogn :: new Vogn :: Nil 	
  	
 class Vogn {
-  def +(vogn: Vogn) = List(this, vogn)
-  def ::(vogn: Vogn) = List(this, vogn)
+  def +(vogn: Vogn) = this :: vogn :: Nil
+  def ::(vogn: Vogn) = this :: vogn :: Nil
 }
 
 // Vår egen syntaks
@@ -296,6 +287,79 @@ val nyListe = List("Streng", 1,2,4)
  \end {content}
 \end{frame}
 
+\begin{frame}[containsverbatim]{Kontroll strukturer}
+ \begin{content}
+  	\begin{lstlisting}[basicstyle={\small\ttfamily}]
+val en = for(i <- 1 to 3) //for
+  yield i
+en should be( 1 :: 2:: 3:: Nil)
+      
+val to = if(false) //If              
+  1
+else
+  2
+to should be (2)
+
+var i = 0 //While
+val tre = while(i < 3){
+  i = i +1
+  i
+}
+tre.isInstanceOf[Unit] should be(true)
+  	\end{lstlisting}
+ \end {content}
+\end{frame}
+
+
+\begin{frame}[containsverbatim]{Kontroll strukturer -- for}
+ \begin{content}
+  	\begin{lstlisting}[basicstyle={\small\ttfamily}]
+val en = for (i <- 1 to 3 if i % 2 == 0)
+  yield i
+
+en should be (List(2))
+  	\end{lstlisting}
+ \end {content}
+\end{frame}
+
+
+\begin{frame}[containsverbatim]{Funksjoner}
+ \begin{content}
+  	\begin{lstlisting}[basicstyle={\small\ttfamily}]
+(x: Int) => x + 1 // annonym
+
+def annonym(x: Int): Int => {  //named
+  x+1 // med en kodeblokk
+}
+
+//Typisk bruk
+val liste = List(1,2,3)
+liste.filter((i : Int) => i % 2 == 0) should be (List(2))
+ 	\end{lstlisting}
+ \end {content}
+\end{frame}
+
+\begin{frame}[containsverbatim]{Funksjoner -- førsteklasses}
+ \begin{content}
+  	\begin{lstlisting}[basicstyle={\small\ttfamily}]
+// funksjon som variabel verdi
+val funksjon = (x: Int) => x + 1 
+//val funksjon: Int => Int = (x:Int): Int => x+ 1
+
+// -- som retur verdi
+def giFunksjon = funksjon
+
+funksjon(2) should be(3)
+giFunksjon(3) should be(4)
+
+// -- som parameter
+def kjør(funksjon :  Int => Int, i : Int) = funksjon(i)
+
+kjør(funksjon, 5) should be(6)
+kjør(giFunksjon, 10) should be (11)
+ 	\end{lstlisting}
+ \end {content}
+\end{frame}
 
 \begin{frame}[containsverbatim]{Programeringsstiler}
  \begin{content}
@@ -366,6 +430,44 @@ val ropeliste =
 \end{frame}
 
 \kontrast{start.oppgaver.ProgrammeringsStil}
+
+\begin{frame}[containsverbatim]{Collections}
+ \begin{content}
+  	\begin{lstlisting}[basicstyle={\small\ttfamily}]
+val liste = List(1,2,3,4,5,6)
+
+//foreach
+liste.foreach( i => println(i)) 
+// fra -> til
+val somTekst = liste.map(i => i.toString) 
+// finn de vi ønsker oss
+val store = liste.filter(i => i > 3) 
+// crazy shit!
+val sum = liste.foldRight(0)((sum, neste) => sum + neste)  
+ 	\end{lstlisting}
+ \end {content}
+\end{frame}
+
+\begin{frame}[containsverbatim]{Collections}
+ \begin{content}
+  	\begin{lstlisting}[basicstyle={\small\ttfamily}]
+val liste = List(1,2)
+val listeSlutt = List(3,4)
+
+//val heleListen = liste ++ listeSlutt
+// Default er alle collections immutable
+// Det finnes mutable collections se "scala.collection.mutable"
+
+val heleListen = liste ++ listeSlutt
+heleListen should be(List(1,2,3,4))
+
+liste should be(List(1,2))
+listeSlutt should be(List(3,4))
+ 	\end{lstlisting}
+ \end {content}
+\end{frame}
+
+\kontrast{advanced.Oppgaver -- oppgave 2}
 
 \begin{frame}[containsverbatim]{Traits}
  \begin{content}
@@ -464,6 +566,59 @@ val daoB = new DaoB with Loggable
 
 \kontrast{start.oppgaver.Traits}
 
+\begin{frame}[containsverbatim]{Option}
+ \begin{content}
+ \begin{lstlisting}[basicstyle={\small\ttfamily}]
+def findPåLager : Plassering = {...}
+
+findPåLager // retur: null
+    \end{lstlisting}
+  \end {content}
+\end{frame}
+
+\begin{frame}[containsverbatim]{Option}
+ \begin{content}
+ \begin{lstlisting}[basicstyle={\small\ttfamily}]
+def findPåLager: Option[Plassering] = {...}
+
+
+findPåLager // retur: None
+findPåLager // retur: Some(Plassering(10,20))
+    \end{lstlisting}
+  \end {content}
+\end{frame}
+
+\begin{frame}[containsverbatim]{Option}
+ \begin{content}
+ \begin{lstlisting}[basicstyle={\small\ttfamily}]
+class Option [+A] 
+object None extends Option[Nothing] 	
+case class Some [+A] (x: A) extends Option[A]
+
+val option1 : Option[String] = Some("string")
+val option2 : Option[String] = None
+val option3 : Option[String] = Some(1) // compile error
+    \end{lstlisting}
+  \end {content}
+\end{frame}
+
+\begin{frame}[containsverbatim]{Option}
+ \begin{content}
+ \begin{lstlisting}[basicstyle={\small\ttfamily}]
+
+val plassering = findPåLager 
+
+plassering match {
+  case None => //har ikke
+  case Some(plassering) => // hent varen
+}
+
+val varePlasering = plassering getOrElse("(tomt)")
+    \end{lstlisting}
+  \end {content}
+\end{frame}
+
+\kontrast{start.oppgaver.OptionOppgaver}
 
 \begin{frame}[containsverbatim]{Utvidbarhet}
  \begin{content}
@@ -516,6 +671,7 @@ val daoB = new DaoB with Loggable
     \end{lstlisting}
   \end {content}
 \end{frame}
+
 
 \begin{frame}{Patternmatching}
   \begin{content}
@@ -594,6 +750,7 @@ val daoB = new DaoB with Loggable
 	    //go allot!
 	  }
 	}
+	
 	
 	object Application{  new FooService with LoggProcessing } //mix inn ved opprettelse
     \end{lstlisting}
