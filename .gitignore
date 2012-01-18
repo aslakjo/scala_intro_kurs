@@ -12,3 +12,5 @@ scala_intro_kurs.iml
 target/
 out/
 ScoreBoard/tmp/*
+.DS_Store
+.idea_modules/
