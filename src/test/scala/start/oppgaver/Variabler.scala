@@ -4,14 +4,13 @@ package scala.start
 import org.scalatest.Spec
 import org.scalatest.matchers.ShouldMatchers
 
-import model._
 
 class Variabler extends Spec with ShouldMatchers {
   describe("Variabler"){
 
     ignore ("definere en string variabel"){
       val enStreng = 2 // -- fyll inn
-      enStreng.isInstanceOf[String] should be (true)
+//      enStreng.isInstanceOf[String] should be (true)
     }
 
     ignore ("definer en variabel som kan endre seg"){
